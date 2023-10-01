@@ -188,27 +188,32 @@
         <div class="cell" id="98"></div>
         <div class="cell" id="99"></div>
       </div>
-      <div> <button onclick="startGame()">Start Game</button> </div>
+     <div>Input your demo file <input type="file" id="fileInput" accept=".txt"></div> 
+     <br>
+      <div> <button onclick="startGame()">Start Game</button> 
+        <button onclick="restartGame()">Restart Game</button> 
+      </div>
       <div><p id="TotalPoint">Total Point: 0</p></div>
       <div><p id="TotalGoldFound">Total GOLD found: 0</p></div>
       <div><p id="TotalWumpusKill">Total Wumpus Kill: 0</p></div>
       <div><p id="arrowRemain">Arrow Remain: 0</p></div>
+    
     </center>
     <script>
       const SIZE = 10;
       const PITNumber = 6;
-      const WUMPUSNumber = 5;
-      const GOLDNumber = 6;
+      let WUMPUSNumber = 5;
+      let GOLDNumber = 6;
 
       const EMPTY = "e";
-      const PIT = "p";
+      const PIT = "P";
       const BREEZE = "b";
       //const BUMP= 3;
-      const WUMPUS = "w";
+      const WUMPUS = "W";
       const STENCH = "s";
       const BREEZEstench = "bs";
       //const SCREAM= 7;
-      const GOLD = "g";
+      const GOLD = "G";
       const UNCOVER = "u";
       const SAFE = "sa";
       const CANpit = "cp";
@@ -278,6 +283,26 @@
       function getRandomInt(min, max) {
           return Math.floor(Math.random() * (max - min + 1)) + min;
       }
+      let file;
+      const array = [];
+          document.getElementById('fileInput').addEventListener('change', function (event) {
+             file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const fileContent = e.target.result;
+
+                    // Split the file content into lines
+                    const lines = fileContent.split('\n');
+
+                    for (let i = 0; i < 10; i++) {
+                        array.push(Array.from(lines[i].trim())); // Convert each line to an array of characters
+                    }
+                    boardView = array;
+                  };
+                reader.readAsText(file);
+            }
+        });
       function setBoard() {
           //   this.boardView=[
         //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
@@ -292,6 +317,10 @@
         //   [EMPTY,EMPTY,EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY]
         // ]
           // Place pits randomly
+          
+        if(!file){
+          console.log("File input fail");
+        
         for (let i = 0; i < PITNumber; i++) {
           let x, y;
           do {
@@ -318,6 +347,23 @@
           } while (boardView[x][y] !== EMPTY);
           boardView[x][y] = GOLD;
         }
+      }
+      else{
+        console.log("Data set by file");
+        GOLDNumber=0;
+        WUMPUSNumber =0;
+        for(let i=0;i<SIZE;i++){
+          for(let j=0;j<SIZE;j++){
+            boardView[i][j] =  array[i][j];
+            if(array[i][j] === GOLD)
+              GOLDNumber++;
+            if(array[i][j] === WUMPUS) WUMPUSNumber++;
+          }
+        }
+        arrowRemain = WUMPUSNumber
+        console.log(boardView);
+
+      }
           
        console.log(boardView," is board view")
 
@@ -365,15 +411,15 @@
         let theDiv = document.getElementById(posToDivID(x, y));
         theDiv.classList.add("visited");
         theDiv.classList.add("Nvisited");
-        if (checkAdjacentCell(x,y) == "s") theDiv.classList.add("snitchCell");
-        else if (checkAdjacentCell(x,y) == "b") theDiv.classList.add("breezeCell");
-        else if (checkAdjacentCell(x,y) == "bs") theDiv.classList.add("doubleCell");
-        else if (checkAdjacentCell(x,y) == "w") theDiv.classList.add("wumpusCell");
-        else if (checkAdjacentCell(x,y) == "p") theDiv.classList.add("pitCell");
-        else if (checkAdjacentCell(x,y) == "g") theDiv.classList.add("goldCell");
+        if (checkAdjacentCell(x,y) == STENCH) theDiv.classList.add("snitchCell");
+        else if (checkAdjacentCell(x,y) == BREEZE) theDiv.classList.add("breezeCell");
+        else if (checkAdjacentCell(x,y) == BREEZEstench) theDiv.classList.add("doubleCell");
+        else if (checkAdjacentCell(x,y) == WUMPUS) theDiv.classList.add("wumpusCell");
+        else if (checkAdjacentCell(x,y) == PIT) theDiv.classList.add("pitCell");
+        else if (checkAdjacentCell(x,y) == GOLD) theDiv.classList.add("goldCell");
 
-        if (checkAdjacentCell(x,y) == "p" || checkAdjacentCell(x,y) == "w") {
-          alert("Game Over");
+        if (checkAdjacentCell(x,y) == PIT || checkAdjacentCell(x,y) == WUMPUS) {
+          alert("Game Over. Agent killed");
           agent.gameOver = true;
           //location.reload();
           console.log("Game over for wumpus and pit : ", x, " ", y);
@@ -453,7 +499,7 @@
           document.getElementById("TotalGoldFound").innerHTML = `Total gold found: ${found_gold}`;
           
         if (found_gold == GOLDNumber) {
-          alert("Congratulation Game Finished");
+          alert("Congratulation Game Finished. All GOLD collected");
           agent.gameOver = true;
           //location.reload();
           console.log("Game over for gold ");
@@ -765,7 +811,7 @@
             this.agentX = i;
             this.agentY = j;
             console.log(i, " ", j, " in kill part ", path);
-            SLEEPINGTIME = 1000;
+            SLEEPINGTIME = 500;
             let status = await aiMovement(path);
             //send the point or the path to forntent
             //this.checkStatus(status)                //check  if the gane end
@@ -976,6 +1022,13 @@
 
       const agent = new Agent();
       async function startGame(){
+        await setBoard();
+        setAttribute(9,0);
+        agent.initiateTheGame();
+      }
+
+      async function restartGame(){
+        location.reload();
         await setBoard();
         setAttribute(9,0);
         agent.initiateTheGame();
