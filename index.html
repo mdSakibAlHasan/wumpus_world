@@ -1,0 +1,959 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="board.css" />
+    <script src="./../Move/Move.js"></script>
+
+    <style>
+      .cell {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+        display: inline-block;
+        background-color: rgb(37, 35, 35);
+        padding: 1px;
+      }
+      .visited {
+        background-color: rgb(196, 187, 187);
+      }
+      .Nvisited {
+        border: 2px solid green;
+      }
+
+      .pitCell {
+        background-color: rgb(0, 0, 0);
+        border: 1px solid red;
+      }
+      .wumpusCell {
+        background-image: url(picW.jpg);
+        background-size: 50px 50px;
+      }
+      .breezeCell {
+        background-image: url(breezePic.PNG);
+        background-size: 50px 50px;
+      }
+      .snitchCell {
+        background-image: url(stenchPic.PNG);
+        background-size: 50px 50px;
+      }
+      .doubleCell {
+        background-image: url(doublePic.PNG);
+        background-size: 50px 50px;
+      }
+      .goldCell {
+        background-image: url(gold.jpg);
+        background-size: 50px 50px;
+      }
+      .agentCell {
+        background-image: url(agent.jpeg);
+        background-size: 50px 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <center>
+      <div>
+        <div class="cell" id="00"></div>
+        <div class="cell" id="01"></div>
+        <div class="cell" id="02"></div>
+        <div class="cell" id="03"></div>
+        <div class="cell" id="04"></div>
+        <div class="cell" id="05"></div>
+        <div class="cell" id="06"></div>
+        <div class="cell" id="07"></div>
+        <div class="cell" id="08"></div>
+        <div class="cell" id="09"></div>
+      </div>
+      <div>
+        <div class="cell" id="10"></div>
+        <div class="cell" id="11"></div>
+        <div class="cell" id="12"></div>
+        <div class="cell" id="13"></div>
+        <div class="cell" id="14"></div>
+        <div class="cell" id="15"></div>
+        <div class="cell" id="16"></div>
+        <div class="cell" id="17"></div>
+        <div class="cell" id="18"></div>
+        <div class="cell" id="19"></div>
+      </div>
+      <div>
+        <div class="cell" id="20"></div>
+        <div class="cell" id="21"></div>
+        <div class="cell" id="22"></div>
+        <div class="cell" id="23"></div>
+        <div class="cell" id="24"></div>
+        <div class="cell" id="25"></div>
+        <div class="cell" id="26"></div>
+        <div class="cell" id="27"></div>
+        <div class="cell" id="28"></div>
+        <div class="cell" id="29"></div>
+      </div>
+      <div>
+        <div class="cell" id="30"></div>
+        <div class="cell" id="31"></div>
+        <div class="cell" id="32"></div>
+        <div class="cell" id="33"></div>
+        <div class="cell" id="34"></div>
+        <div class="cell" id="35"></div>
+        <div class="cell" id="36"></div>
+        <div class="cell" id="37"></div>
+        <div class="cell" id="38"></div>
+        <div class="cell" id="39"></div>
+      </div>
+      <div>
+        <div class="cell" id="40"></div>
+        <div class="cell" id="41"></div>
+        <div class="cell" id="42"></div>
+        <div class="cell" id="43"></div>
+        <div class="cell" id="44"></div>
+        <div class="cell" id="45"></div>
+        <div class="cell" id="46"></div>
+        <div class="cell" id="47"></div>
+        <div class="cell" id="48"></div>
+        <div class="cell" id="49"></div>
+      </div>
+      <div>
+        <div class="cell" id="50"></div>
+        <div class="cell" id="51"></div>
+        <div class="cell" id="52"></div>
+        <div class="cell" id="53"></div>
+        <div class="cell" id="54"></div>
+        <div class="cell" id="55"></div>
+        <div class="cell" id="56"></div>
+        <div class="cell" id="57"></div>
+        <div class="cell" id="58"></div>
+        <div class="cell" id="59"></div>
+      </div>
+      <div>
+        <div class="cell" id="60"></div>
+        <div class="cell" id="61"></div>
+        <div class="cell" id="62"></div>
+        <div class="cell" id="63"></div>
+        <div class="cell" id="64"></div>
+        <div class="cell" id="65"></div>
+        <div class="cell" id="66"></div>
+        <div class="cell" id="67"></div>
+        <div class="cell" id="68"></div>
+        <div class="cell" id="69"></div>
+      </div>
+      <div>
+        <div class="cell" id="70"></div>
+        <div class="cell" id="71"></div>
+        <div class="cell" id="72"></div>
+        <div class="cell" id="73"></div>
+        <div class="cell" id="74"></div>
+        <div class="cell" id="75"></div>
+        <div class="cell" id="76"></div>
+        <div class="cell" id="77"></div>
+        <div class="cell" id="78"></div>
+        <div class="cell" id="79"></div>
+      </div>
+      <div>
+        <div class="cell" id="80"></div>
+        <div class="cell" id="81"></div>
+        <div class="cell" id="82"></div>
+        <div class="cell" id="83"></div>
+        <div class="cell" id="84"></div>
+        <div class="cell" id="85"></div>
+        <div class="cell" id="86"></div>
+        <div class="cell" id="87"></div>
+        <div class="cell" id="88"></div>
+        <div class="cell" id="89"></div>
+      </div>
+      <div>
+        <div class="cell" id="90"></div>
+        <div class="cell" id="91"></div>
+        <div class="cell" id="92"></div>
+        <div class="cell" id="93"></div>
+        <div class="cell" id="94"></div>
+        <div class="cell" id="95"></div>
+        <div class="cell" id="96"></div>
+        <div class="cell" id="97"></div>
+        <div class="cell" id="98"></div>
+        <div class="cell" id="99"></div>
+      </div>
+    </center>
+    <script>
+      const SIZE = 10;
+      const PITNumber = 6;
+      const WUMPUSNumber = 5;
+      const GOLDNumber = 6;
+
+      const EMPTY = "e";
+      const PIT = "p";
+      const BREEZE = "b";
+      //const BUMP= 3;
+      const WUMPUS = "w";
+      const STENCH = "s";
+      const BREEZEstench = "bs";
+      //const SCREAM= 7;
+      const GOLD = "g";
+      const UNCOVER = "u";
+      const SAFE = "sa";
+      const CANpit = "cp";
+      const CANwumpus = "cw";
+      const CANboth = "cb";
+
+      var wumpusNo = 5;
+      var pitNo = 6;
+      var goldNo = 6;
+      const wumpusArray = [];
+      const boardSize = 10;
+      const boardView = [];
+      let myPos_X = 0;
+      let myPos_Y = 0;
+      let found_gold = 0;
+
+      //agent.startGame();
+
+      function posToDivID(inX, inY) {
+        //return cell number 01-99
+        let retV = inX * 10 + inY;
+        if (retV == 0) return "00";
+        else if (retV == 1) return "01";
+        else if (retV == 2) return "02";
+        else if (retV == 3) return "03";
+        else if (retV == 4) return "04";
+        else if (retV == 5) return "05";
+        else if (retV == 6) return "06";
+        else if (retV == 7) return "07";
+        else if (retV == 8) return "08";
+        else if (retV == 9) return "09";
+        else return retV;
+      }
+      // Initialize the boardView array
+      for (let i = 0; i < boardSize; i++) {
+        boardView[i] = [];
+        for (let j = 0; j < boardSize; j++) {
+          boardView[i][j] = "e"; // Initialize with empty strings
+        }
+      }
+
+      function startGame() {
+        alert("Game Started");
+        wumpusArray.forEach((element) => {
+          console.log(element);
+        });
+      }
+
+      function getIndex_x_fromNumber(num) {
+        if (num <= 10) return 0;
+        else if (num <= 20) return 1;
+        else if (num <= 30) return 2;
+        else if (num <= 40) return 3;
+        else if (num <= 50) return 4;
+        else if (num <= 60) return 5;
+        else if (num <= 70) return 6;
+        else if (num <= 80) return 7;
+        else if (num <= 90) return 8;
+        else if (num <= 100) return 9;
+      }
+      function getIndex_y_fromNumber(num) {
+        let retValue = num % 10;
+        if (retValue == 0) return 9;
+        else return retValue;
+      }
+      function setWumpus() {
+        for (let i = 0; i < wumpusNo; ) {
+          let x = Math.floor(Math.random() * 100 + 1);
+          if (!wumpusArray.includes(x) && x != 2 && x != 11) {
+            let rowIndex = getIndex_x_fromNumber(x);
+            let colIndex = getIndex_y_fromNumber(x);
+            boardView[rowIndex][colIndex] = "w";
+            if (rowIndex - 1 >= 0) {
+              if (boardView[rowIndex - 1][colIndex] != "w") {
+                boardView[rowIndex - 1][colIndex] = "s";
+              }
+            }
+            if (colIndex - 1 >= 0) {
+              if (boardView[rowIndex][colIndex - 1] != "w") {
+                boardView[rowIndex][colIndex - 1] = "s";
+              }
+            }
+            if (rowIndex + 1 <= 9) {
+              if (boardView[rowIndex + 1][colIndex] != "w") {
+                boardView[rowIndex + 1][colIndex] = "s";
+              }
+            }
+            if (colIndex + 1 <= 9) {
+              if (boardView[rowIndex][colIndex + 1] != "w") {
+                boardView[rowIndex][colIndex + 1] = "s";
+              }
+            }
+            wumpusArray.push(x);
+            // document.getElementById(x).innerText="red";
+            i++;
+          }
+        }
+        console.log(wumpusArray);
+        // console.log(boardView);
+      }
+      function setGold() {
+        for (let i = 0; i < wumpusNo; ) {
+          let x = Math.floor(Math.random() * 100 + 1);
+          let rowIndex = getIndex_x_fromNumber(x);
+          let colIndex = getIndex_y_fromNumber(x);
+
+          if (
+            boardView[rowIndex][colIndex] != "w" &&
+            boardView[rowIndex][colIndex] != "b" &&
+            boardView[rowIndex][colIndex] != "s" &&
+            boardView[rowIndex][colIndex] != "bs"
+          ) {
+            boardView[rowIndex][colIndex] = "g";
+            i++;
+          }
+        }
+      }
+
+      function setPits() {
+        for (let i = 0; i < pitNo; ) {
+          let x = Math.floor(Math.random() * 100 + 1);
+          if (!wumpusArray.includes(x) && x != 2 && x != 11) {
+            let rowIndex = getIndex_x_fromNumber(x);
+            let colIndex = getIndex_y_fromNumber(x);
+            boardView[rowIndex][colIndex] = "p";
+            if (rowIndex - 1 >= 0) {
+              if (boardView[rowIndex - 1][colIndex] != "w") {
+                if (boardView[rowIndex - 1][colIndex] == "s")
+                  boardView[rowIndex - 1][colIndex] = "bs";
+                else boardView[rowIndex - 1][colIndex] = "b";
+              }
+            }
+            if (colIndex - 1 >= 0) {
+              if (boardView[rowIndex][colIndex - 1] != "w") {
+                if (boardView[rowIndex][colIndex - 1] == "s")
+                  boardView[rowIndex][colIndex - 1] = "bs";
+                else boardView[rowIndex][colIndex - 1] = "b";
+              }
+            }
+            if (rowIndex + 1 <= 9) {
+              if (boardView[rowIndex + 1][colIndex] != "w") {
+                if (boardView[rowIndex + 1][colIndex] == "s")
+                  boardView[rowIndex + 1][colIndex] = "bs";
+                else boardView[rowIndex + 1][colIndex] = "b";
+              }
+            }
+            if (colIndex + 1 <= 9) {
+              if (boardView[rowIndex][colIndex + 1] != "w") {
+                if (boardView[rowIndex][colIndex + 1] == "s")
+                  boardView[rowIndex][colIndex + 1] = "bs";
+                else boardView[rowIndex][colIndex + 1] = "b";
+              }
+            }
+            // wumpusArray.push(x);
+            // document.getElementById(x).innerText="red";
+            i++;
+          }
+        }
+        // console.log(wumpusArray);
+        console.log(boardView);
+      }
+
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      function setAttribute(x, y) {
+        let textt = "";
+        let theDiv = document.getElementById(posToDivID(x, y));
+        theDiv.classList.add("visited");
+        theDiv.classList.add("Nvisited");
+        if (boardView[x][y] == "s") theDiv.classList.add("snitchCell");
+        else if (boardView[x][y] == "b") theDiv.classList.add("breezeCell");
+        else if (boardView[x][y] == "bs") theDiv.classList.add("doubleCell");
+        else if (boardView[x][y] == "w") theDiv.classList.add("wumpusCell");
+        else if (boardView[x][y] == "p") theDiv.classList.add("pitCell");
+        else if (boardView[x][y] == "g") theDiv.classList.add("goldCell");
+
+        if (boardView[x][y] == "p" || boardView[x][y] == "w") {
+          //alert("Game Over");
+          //location.reload();
+          console.log("Game over for wumpus and pit : ", x, " ", y);
+        }
+
+        if (boardView[x][y] == "g") found_gold++;
+        if (found_gold == goldNo) {
+          //alert("Congratulation Game Finished");
+          //location.reload();
+          console.log("Game over for gold : ", x, " ", y);
+        }
+      }
+      document.onkeydown = function (event) {
+        switch (event.keyCode) {
+          case 37:
+            //    alert('Left key');
+            if (myPos_Y != 0) {
+              let theDiv = document.getElementById(
+                posToDivID(myPos_X, myPos_Y)
+              );
+              theDiv.classList.remove("Nvisited");
+              myPos_Y--;
+              setAttribute();
+            }
+            break;
+          case 38:
+            //    alert('Up key');
+            if (myPos_X != 0) {
+              let theDiv = document.getElementById(
+                posToDivID(myPos_X, myPos_Y)
+              );
+              theDiv.classList.remove("Nvisited");
+              myPos_X--;
+              setAttribute();
+            }
+            break;
+          case 39:
+            //    alert('Right key');
+            if (myPos_Y != 9) {
+              let theDiv = document.getElementById(
+                posToDivID(myPos_X, myPos_Y)
+              );
+              theDiv.classList.remove("Nvisited");
+              myPos_Y++;
+              setAttribute();
+            }
+            break;
+          case 40:
+            //    alert('Down key');
+            if (myPos_X != 9) {
+              let theDiv = document.getElementById(
+                posToDivID(myPos_X, myPos_Y)
+              );
+              theDiv.classList.remove("Nvisited");
+              myPos_X++;
+              setAttribute();
+            }
+            break;
+        }
+      };
+
+      const getIndexFromNumber = (num) => ({
+        x: Math.floor(num / 10),
+        y: num % 10,
+      });
+
+      setAttribute(0, 0);
+      setWumpus();
+      setPits();
+      setGold();
+
+      async function aiMovement(lowestPath, arrow) {
+        let lastPath = lowestPath.length - 1;
+        for (let i = 1; i < lowestPath.length; i++) {
+          await sleep(1000);
+          const { x: rowIndex, y: colIndex } = getIndexFromNumber(
+            lowestPath[i]
+          );
+          const { x: oldRowIndex, y: oldColIndex } = getIndexFromNumber(
+            lowestPath[i - 1]
+          );
+          let theDiv = document.getElementById(
+            posToDivID(oldRowIndex, oldColIndex)
+          );
+          theDiv.classList.remove("Nvisited");
+          console.log(rowIndex, colIndex, " index");
+          console.log(
+            lowestPath[i] - lowestPath[i - 1],
+            " ",
+            myPos_X,
+            " ",
+            myPos_Y
+          );
+
+          if (arrow && lowestPath.length - 1 === i) {
+            if (boardView[rowIndex][colIndex] === WUMPUS) {
+              boardView[rowIndex][colIndex] = EMPTY;
+              setAttribute(rowIndex, colIndex);
+            } else {
+            }
+          } else setAttribute(rowIndex, colIndex);
+        }
+
+        const { x: rowIndex, y: colIndex } = getIndexFromNumber(
+          lowestPath[lastPath]
+        );
+        return boardView[rowIndex][colIndex];
+      }
+
+      //agent.initiateTheGame();
+
+      class Agent {
+        constructor() {
+          this.board = Array(SIZE)
+            .fill(null)
+            .map(() => Array(SIZE).fill(UNCOVER));
+          this.agentX = 0;
+          this.agentY = 0;
+          this.agentHasGold = false;
+          this.agentHasArrow = true;
+          this.gameOver = false;
+          this.originalBoard;
+          this.game;
+          this.goldNumber = GOLDNumber;
+          this.totalPoint = 0;
+          this.numberOfWumpusKill = 0;
+          this.PITProbability = 1;
+        }
+
+        directions = [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ];
+
+        startGame() {
+          this.board[this.agentX][this.agentY] = EMPTY;
+        }
+
+        async initiateTheGame() {
+          //this.game = new WumpusWorld();
+          //this.game.createBoard();
+          console.log(
+            "Here game started-----------------------------------------------"
+          );
+
+          this.board[this.agentX][this.agentY] = EMPTY;
+          let count = 0;
+          //await this.findBestMove();
+          while (this.gameOver === false && count < 3) {
+            count++;
+            console.log("Here are agin find cell for empty cell");
+            await this.findBestMove();
+
+            if (this.gameOver === false) {
+              console.log("Probability part started");
+              this.createSaveMove();
+            }
+          }
+
+          console.log("Final statement: ");
+          console.log(this.totalPoint, " is the point");
+          console.log(GOLDNumber - this.goldNumber, "  gold found ");
+          console.log(this.numberOfWumpusKill, " total wumpus kill");
+        }
+
+        async findBestMove() {
+          let count = 0,
+            checkArray;
+          do {
+            //console.log("lests check ",count);
+            checkArray = this.findAdjacentCell(this.board);
+            console.log(checkArray, " here after get it");
+            if (checkArray.length === 0) {
+              break;
+            }
+            const graph = new Graph();
+            graph.createGraph(this.board);
+            let cost = Number.MAX_VALUE,
+              lowestPath,
+              lowestPoint;
+            for (const point of checkArray) {
+              const path = graph.BFS(
+                this.agentX * SIZE + this.agentY,
+                point[0] * SIZE + point[1]
+              );
+              if (path.length < cost) {
+                cost = path.length;
+                lowestPath = path;
+                lowestPoint = point;
+              }
+
+              this.board[point[0]][point[1]] = UNCOVER;
+            }
+            console.log("This is the lowest path", lowestPath);
+
+            let status = await aiMovement(lowestPath);
+            console.log("this is from forntent: ", status);
+            //this.game.passingMove(lowestPoint[0], lowestPoint[1]); //send the point or the path to forntent
+            this.checkStatus(status); //check  if the gane end
+            if (status === GOLD) status = EMPTY;
+            this.board[lowestPoint[0]][lowestPoint[1]] = status;
+            this.agentX = lowestPoint[0];
+            this.agentY = lowestPoint[1];
+            this.totalPoint -= lowestPath.length - 1;
+            //count++;
+          } while (
+            this.gameOver === false &&
+            checkArray.length !== 0 &&
+            count < 5
+          );
+
+          for (let row of this.board) {
+            console.log(row.join("    "));
+            console.log();
+          }
+        }
+
+        checkStatus(status) {
+          if (status === GOLD) {
+            this.totalPoint += 1000;
+            console.log("COngratulation you find the GOLD");
+            if (--this.goldNumber == 0) this.gameOver = true;
+          } else if (status === WUMPUS) {
+            console.log("Game Over. Wumpus found in this cell");
+            this.gameOver = true;
+          } else if (status === PIT) {
+            console.log("Game Over. You fall in PIT");
+            this.gameOver = true;
+          }
+        }
+
+        convertedArray(sensor) {
+          const probability = Array(SIZE)
+            .fill(null)
+            .map(() => Array(SIZE).fill(0));
+          for (let i = 0; i < SIZE; i++) {
+            //check where there are wumpus or pit
+            for (let j = 0; j < SIZE; j++) {
+              if (
+                this.board[i][j] === EMPTY ||
+                this.board[i][j] === BREEZEstench ||
+                this.board[i][j] === sensor
+              ) {
+                probability[i][j] = -1;
+              } else if (this.board[i][j] === UNCOVER) {
+                for (const [px, py] of this.directions) {
+                  const x = i + px;
+                  const y = j + py;
+                  if (
+                    this.validCheck(x, y) &&
+                    (this.board[x][y] === sensor ||
+                      this.board[x][y] === BREEZEstench)
+                  ) {
+                    probability[i][j]++;
+                  }
+                }
+              }
+            }
+          }
+
+          return probability;
+        }
+
+        createSaveMove() {
+          const pitProbability = this.convertedArray(BREEZE);
+          const wumpusProbability = this.convertedArray(STENCH);
+          this.applyLogic(pitProbability, wumpusProbability); //try to logic apply here
+        }
+
+        makeMovement(i, j) {
+          console.log("make a probability movement");
+          this.board[i][j] = SAFE;
+          //replace it with another function
+          const graph = new Graph();
+          graph.createGraph(this.board);
+          const path = graph.BFS(
+            this.agentX * SIZE + this.agentY,
+            i * SIZE + j
+          );
+          let status = aiMovement(path);
+          console.log("this is from forntent: ", status); //send the point or the path to forntent
+          //if (status === GOLD) status = this.game.passingMove(i, j);
+          if (status === GOLD) status = EMPTY;
+          this.checkStatus(status); //check  if the gane end
+          console.log(status, " is the status of ", i, " - ", j);
+          this.board[i][j] = status;
+          this.agentX = i;
+          this.agentY = j;
+          this.totalPoint -= path.length - 1;
+        }
+
+        applyLogic(probability, wumpusProbability) {
+          //find acctually there are pit or wumpus exixs or not
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              if (this.board[i][j] === CANboth || this.board[i][j] === CANpit) {
+                if (this.checkSorounding(this.board, i, j, STENCH)) return true;
+              }
+              if (
+                this.board[i][j] === CANboth ||
+                this.board[i][j] === CANwumpus
+              ) {
+                if (this.checkSorounding(this.board, i, j, BREEZE)) return true;
+              }
+            }
+          }
+
+          if (this.tryKillWumpus(wumpusProbability)) return;
+          console.log("No inferance apply here--------------------");
+          for (let row of probability) {
+            console.log(row.join("    "));
+            console.log();
+          }
+
+          //where there are low probability to get the pit it can explore this
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              if (
+                probability[i][j] === this.PITProbability &&
+                wumpusProbability[i][j] === 0
+              ) {
+                //@update add here list and sort then find also 2 not only 1
+                this.makeMovement(i, j);
+                this.PITProbability = 1;
+                return;
+              }
+            }
+          }
+
+          this.PITProbability++; //there are no probability for PIT with 1 breeze
+          return;
+        } //apply here that here are actual pit and wumpus
+
+        tryKillWumpus(wumpusProbability) {
+          const mySet = new Set();
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              if (
+                wumpusProbability[i][j] !== -1 &&
+                wumpusProbability[i][j] !== 0
+              ) {
+                mySet.add([i, j]);
+              }
+            }
+          }
+
+          const myArray = Array.from(mySet);
+          if (myArray.length === 0) return false;
+          myArray.sort((a, b) => {
+            const [x1, y1] = a;
+            const [x2, y2] = b;
+            const value1 = wumpusProbability[x1][y1];
+            const value2 = wumpusProbability[x2][y2];
+            return value2 - value1;
+          });
+
+          const [highestX, highestY] = myArray[0];
+          const highestValue = wumpusProbability[highestX][highestY];
+
+          console.log(`Highest Value: ${highestValue}`);
+          console.log(`Coordinates: (${highestX}, ${highestY})`);
+
+          //kill here
+          if (highestValue >= 2) {
+            //@update check here that arrow are here
+            console.log("make a movement for kill wumpus");
+            let i, j;
+            for (const [px, py] of this.directions) {
+              const x = highestX + px;
+              const y = highestY + py;
+              if (
+                this.validCheck(x, y) &&
+                (this.board[x][y] === EMPTY ||
+                  this.board[x][y] === BREEZEstench ||
+                  this.board[x][y] === BREEZE ||
+                  this.board[x][y] === STENCH)
+              ) {
+                i = x;
+                j = y;
+                break;
+              }
+            }
+            const graph = new Graph();
+            graph.createGraph(this.board);
+            const path = graph.BFS(
+              this.agentX * SIZE + this.agentY,
+              i * SIZE + j
+            );
+            this.agentX = i;
+            this.agentY = j;
+            //send the point or the path to forntent
+            //this.checkStatus(status)                //check  if the gane end
+            this.totalPoint -= path.length - 1 + 10;
+            if (this.game.killWumpus(highestX, highestY)) {
+              const path = graph.BFS(
+                this.agentX * SIZE + this.agentY,
+                highestX * SIZE + highestY
+              );
+              let status = aiMovement(
+                lowestPath,
+                lowestPoint[0],
+                lowestPoint[1],
+                true
+              );
+              console.log("this is from forntent: ", status);
+              console.log(status, " is the status of ", i, " - ", j);
+              this.board[i][j] = status;
+              this.agentX = highestX;
+              this.agentY = highestY;
+              console.log("Here wumpus are killed###########################");
+              this.numberOfWumpusKill++;
+              //console.log(highestX," ",highestY);
+              //console.log(this.board)
+              for (const [px, py] of this.directions) {
+                //update currrent board
+                const x = highestX + px;
+                const y = highestY + py;
+                //console.log(x," ",y," ",px," ",py)
+                //console.log(this.board);
+                //console.log(this.board[x])
+                if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
+                  this.board[x][y] = this.game.passingMove(x, y);
+                }
+              }
+              this.totalPoint -= 1;
+              return true;
+            }
+
+            return false;
+          } else return false;
+        }
+
+        checkSorounding(board, i, j, sensor) {
+          //create safe if it not wumpus or pit
+          for (const [px, py] of this.directions) {
+            //add here sure there are pit or wumpus
+            const x = i + px;
+            const y = j + py;
+            if (
+              this.validCheck(x, y) &&
+              (board[x][y] === EMPTY || board[x][y] === sensor)
+            ) {
+              if (this.board[i][j] === CANboth) this.board[i][j] = sensor;
+              else {
+                this.makeMovement(i, j);
+                return true;
+              }
+            }
+          }
+          return false;
+        }
+
+        findAdjacentCell(board) {
+          //return all the set of cell that has adjacent uncover cell
+          const mySet = new Set();
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              if (
+                board[i][j] === UNCOVER &&
+                this.checkAdjacentCell(board, i, j)
+              ) {
+                mySet.add([i, j]);
+                this.board[i][j] = SAFE;
+              }
+            }
+          }
+
+          const pointArray = Array.from(mySet);
+          return pointArray;
+        }
+
+        validCheck(i, j) {
+          return i >= 0 && i < SIZE && j >= 0 && j < SIZE;
+        }
+
+        checkAdjacentCell(board, i, j) {
+          //return if there any cell that is uncover
+          const directions = [
+            [1, 0],
+            [0, 1],
+            [-1, 0],
+            [0, -1],
+          ];
+          for (const [px, py] of this.directions) {
+            const x = i + px;
+            const y = j + py;
+            //if (this.validCheck(x, y) && (board[x][y] === EMPTY || board[x][y] === SAFE))
+            if (this.validCheck(x, y) && board[x][y] === EMPTY) return true;
+          }
+
+          return false;
+        }
+      }
+
+      class Graph {
+        constructor() {
+          this.adj;
+        }
+
+        isKnown(board, i, j) {
+          if (
+            i < SIZE &&
+            j < SIZE &&
+            (board[i][j] === EMPTY ||
+              board[i][j] === BREEZE ||
+              board[i][j] === STENCH ||
+              board[i][j] === BREEZEstench ||
+              board[i][j] === SAFE)
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        createGraph(board) {
+          this.adj = new Array(SIZE * SIZE).fill(null).map(() => []);
+          //console.log(this.adj," is initial graph")
+
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              if (this.isKnown(board, i, j)) {
+                //console.log(i,j);
+                if (this.isKnown(board, i, j + 1)) {
+                  this.addEdge(i * SIZE + j, i * SIZE + j + 1);
+                  //console.log("left")
+                }
+                if (this.isKnown(board, i + 1, j)) {
+                  this.addEdge(i * SIZE + j, (i + 1) * SIZE + j);
+                  //console.log("down")
+                }
+              }
+            }
+          }
+
+          //console.log(this.adj," is after create graph")
+        }
+
+        addEdge(u, v) {
+          //console.log(u,"--" ,v)
+          this.adj[u].push(v);
+          this.adj[v].push(u);
+        }
+
+        BFS(s, d) {
+          //console.log("The graph is ",this.adj);
+          const visited = new Array(SIZE * SIZE).fill(false);
+          const queue = [];
+
+          queue.push(s);
+          visited[s] = true;
+
+          const parent = new Array(SIZE * SIZE).fill(-1);
+
+          while (queue.length > 0) {
+            const u = queue.shift();
+
+            for (const v of this.adj[u]) {
+              if (!visited[v]) {
+                queue.push(v);
+                visited[v] = true;
+                parent[v] = u;
+              }
+            }
+          }
+
+          if (!visited[d]) {
+            return false;
+          }
+
+          const path = [];
+
+          while (d !== -1) {
+            path.push(d);
+            d = parent[d];
+          }
+
+          path.reverse();
+
+          return path;
+        }
+      }
+
+      const agent = new Agent();
+      agent.initiateTheGame();
+    </script>
+  </body>
+</html>
