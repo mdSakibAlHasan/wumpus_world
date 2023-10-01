@@ -203,6 +203,7 @@
       let myPos_X = 0;
       let myPos_Y = 0;
       let found_gold = 0;
+      let SLEEPINGTIME = 200;
 
       //agent.startGame();
 
@@ -438,10 +439,10 @@
       setPits();
       setGold();
 
-      async function aiMovement(lowestPath, arrow) {
+      async function aiMovement(lowestPath) {
         let lastPath = lowestPath.length - 1;
         for (let i = 1; i < lowestPath.length; i++) {
-          await sleep(1000);
+          await sleep(SLEEPINGTIME);
           const { x: rowIndex, y: colIndex } = getIndexFromNumber(
             lowestPath[i]
           );
@@ -461,19 +462,23 @@
             myPos_Y
           );
 
-          if (arrow && lowestPath.length - 1 === i) {
-            if (boardView[rowIndex][colIndex] === WUMPUS) {
-              boardView[rowIndex][colIndex] = EMPTY;
-              setAttribute(rowIndex, colIndex);
-            } else {
-            }
-          } else setAttribute(rowIndex, colIndex);
+          setAttribute(rowIndex, colIndex);
         }
 
         const { x: rowIndex, y: colIndex } = getIndexFromNumber(
           lowestPath[lastPath]
         );
         return boardView[rowIndex][colIndex];
+      }
+
+      function killWumpus(pointX, pointY) {
+        if (boardView[pointX][pointY] === WUMPUS) {
+          boardView[pointX][pointY] = EMPTY; //later try to adjus sorounding
+          alert("kill wumpus");
+          return true;
+        } else {
+          return false;
+        }
       }
 
       //agent.initiateTheGame();
@@ -517,15 +522,17 @@
           this.board[this.agentX][this.agentY] = EMPTY;
           let count = 0;
           //await this.findBestMove();
-          while (this.gameOver === false && count < 3) {
+          while (this.gameOver === false) {
             count++;
             console.log("Here are agin find cell for empty cell");
             await this.findBestMove();
 
             if (this.gameOver === false) {
               console.log("Probability part started");
-              this.createSaveMove();
+              await this.createSaveMove();
             }
+
+            console.log("One mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
           }
 
           console.log("Final statement: ");
@@ -632,13 +639,13 @@
           return probability;
         }
 
-        createSaveMove() {
+        async createSaveMove() {
           const pitProbability = this.convertedArray(BREEZE);
           const wumpusProbability = this.convertedArray(STENCH);
-          this.applyLogic(pitProbability, wumpusProbability); //try to logic apply here
+          await this.applyLogic(pitProbability, wumpusProbability); //try to logic apply here
         }
 
-        makeMovement(i, j) {
+        async makeMovement(i, j) {
           console.log("make a probability movement");
           this.board[i][j] = SAFE;
           //replace it with another function
@@ -648,7 +655,7 @@
             this.agentX * SIZE + this.agentY,
             i * SIZE + j
           );
-          let status = aiMovement(path);
+          let status = await aiMovement(path);
           console.log("this is from forntent: ", status); //send the point or the path to forntent
           //if (status === GOLD) status = this.game.passingMove(i, j);
           if (status === GOLD) status = EMPTY;
@@ -660,7 +667,7 @@
           this.totalPoint -= path.length - 1;
         }
 
-        applyLogic(probability, wumpusProbability) {
+        async applyLogic(probability, wumpusProbability) {
           //find acctually there are pit or wumpus exixs or not
           for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
@@ -676,7 +683,8 @@
             }
           }
 
-          if (this.tryKillWumpus(wumpusProbability)) return;
+          let killStatus = await this.tryKillWumpus(wumpusProbability);
+          if (killStatus) return;
           console.log("No inferance apply here--------------------");
           for (let row of probability) {
             console.log(row.join("    "));
@@ -691,7 +699,7 @@
                 wumpusProbability[i][j] === 0
               ) {
                 //@update add here list and sort then find also 2 not only 1
-                this.makeMovement(i, j);
+                await this.makeMovement(i, j);
                 this.PITProbability = 1;
                 return;
               }
@@ -702,7 +710,7 @@
           return;
         } //apply here that here are actual pit and wumpus
 
-        tryKillWumpus(wumpusProbability) {
+        async tryKillWumpus(wumpusProbability) {
           const mySet = new Set();
           for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
@@ -759,20 +767,36 @@
             );
             this.agentX = i;
             this.agentY = j;
+            console.log(i, " ", j, " in kill part ", path);
+            SLEEPINGTIME = 1000;
+            let status = await aiMovement(path);
             //send the point or the path to forntent
             //this.checkStatus(status)                //check  if the gane end
             this.totalPoint -= path.length - 1 + 10;
-            if (this.game.killWumpus(highestX, highestY)) {
+
+            let isKill;
+            if (status) isKill = await killWumpus(highestX, highestY);
+            console.log("Here after kill part ", isKill);
+            if (isKill) {
               const path = graph.BFS(
                 this.agentX * SIZE + this.agentY,
                 highestX * SIZE + highestY
               );
-              let status = aiMovement(
-                lowestPath,
-                lowestPoint[0],
-                lowestPoint[1],
-                true
+              console.log(
+                path,
+                " is the path of ",
+                this.agentX,
+                " ",
+                this.agentY,
+                " ",
+                highestX,
+                " ",
+                highestY
               );
+              let status = await aiMovement([
+                this.agentX * SIZE + this.agentY,
+                highestX * SIZE + highestY,
+              ]);
               console.log("this is from forntent: ", status);
               console.log(status, " is the status of ", i, " - ", j);
               this.board[i][j] = status;
@@ -780,6 +804,8 @@
               this.agentY = highestY;
               console.log("Here wumpus are killed###########################");
               this.numberOfWumpusKill++;
+
+              //try adjust for wumpus
               //console.log(highestX," ",highestY);
               //console.log(this.board)
               for (const [px, py] of this.directions) {
@@ -790,15 +816,20 @@
                 //console.log(this.board);
                 //console.log(this.board[x])
                 if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                  this.board[x][y] = this.game.passingMove(x, y);
+                  if (this.board[x][y] === STENCH) this.board[x][y] = EMPTY;
+                  else if (this.board[x][y] === BREEZEstench)
+                    this.board[x][y] = BREEZE;
+                  //this.board[x][y] = this.game.passingMove(x, y);
                 }
               }
-              this.totalPoint -= 1;
+              //this.totalPoint -= 1;
               return true;
             }
 
+            console.log("Without executing it");
             return false;
           } else return false;
+          console.log("Without executing it");
         }
 
         checkSorounding(board, i, j, sensor) {
