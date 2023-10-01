@@ -172,6 +172,7 @@
         <div class="cell" id="98"></div>
         <div class="cell" id="99"></div>
       </div>
+      <div> <button onclick="startGame()">Start Game</button> </div>
     </center>
     <script>
       const SIZE = 10;
@@ -193,6 +194,7 @@
       const CANpit = "cp";
       const CANwumpus = "cw";
       const CANboth = "cb";
+      const KILLwumpus = 'kw';
 
       var wumpusNo = 5;
       var pitNo = 6;
@@ -205,7 +207,6 @@
       let found_gold = 0;
       let SLEEPINGTIME = 200;
 
-      //agent.startGame();
 
       function posToDivID(inX, inY) {
         //return cell number 01-99
@@ -226,16 +227,11 @@
       for (let i = 0; i < boardSize; i++) {
         boardView[i] = [];
         for (let j = 0; j < boardSize; j++) {
-          boardView[i][j] = "e"; // Initialize with empty strings
+          boardView[i][j] = EMPTY; // Initialize with empty strings
         }
       }
 
-      function startGame() {
-        alert("Game Started");
-        wumpusArray.forEach((element) => {
-          console.log(element);
-        });
-      }
+     
 
       function getIndex_x_fromNumber(num) {
         if (num <= 10) return 0;
@@ -254,102 +250,86 @@
         if (retValue == 0) return 9;
         else return retValue;
       }
-      function setWumpus() {
-        for (let i = 0; i < wumpusNo; ) {
-          let x = Math.floor(Math.random() * 100 + 1);
-          if (!wumpusArray.includes(x) && x != 2 && x != 11) {
-            let rowIndex = getIndex_x_fromNumber(x);
-            let colIndex = getIndex_y_fromNumber(x);
-            boardView[rowIndex][colIndex] = "w";
-            if (rowIndex - 1 >= 0) {
-              if (boardView[rowIndex - 1][colIndex] != "w") {
-                boardView[rowIndex - 1][colIndex] = "s";
-              }
-            }
-            if (colIndex - 1 >= 0) {
-              if (boardView[rowIndex][colIndex - 1] != "w") {
-                boardView[rowIndex][colIndex - 1] = "s";
-              }
-            }
-            if (rowIndex + 1 <= 9) {
-              if (boardView[rowIndex + 1][colIndex] != "w") {
-                boardView[rowIndex + 1][colIndex] = "s";
-              }
-            }
-            if (colIndex + 1 <= 9) {
-              if (boardView[rowIndex][colIndex + 1] != "w") {
-                boardView[rowIndex][colIndex + 1] = "s";
-              }
-            }
-            wumpusArray.push(x);
-            // document.getElementById(x).innerText="red";
-            i++;
-          }
-        }
-        console.log(wumpusArray);
-        // console.log(boardView);
+     
+    
+      function getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
       }
-      function setGold() {
-        for (let i = 0; i < wumpusNo; ) {
-          let x = Math.floor(Math.random() * 100 + 1);
-          let rowIndex = getIndex_x_fromNumber(x);
-          let colIndex = getIndex_y_fromNumber(x);
+      function setBoard() {
+          //   this.boardView=[
+        //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
+        //   [EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY],
+        //   [EMPTY,EMPTY,EMPTY  ,EMPTY,EMPTY,WUMPUS,PIT,GOLD,EMPTY,EMPTY],
+        //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,WUMPUS],
+        //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,WUMPUS,EMPTY],
+        //   [EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
+        //   [WUMPUS,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
+        //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,WUMPUS,WUMPUS,EMPTY,EMPTY,EMPTY],
+        //   [PIT,EMPTY,PIT,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
+        //   [EMPTY,EMPTY,EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY]
+        // ]
+          // Place pits randomly
+        for (let i = 0; i < PITNumber; i++) {
+          let x, y;
+          do {
+              x = getRandomInt(1, SIZE - 1);
+              y = getRandomInt(1, SIZE - 1);
+          } while (boardView[x][y] !== EMPTY);
+          boardView[x][y] = PIT;
+        }
 
-          if (
-            boardView[rowIndex][colIndex] != "w" &&
-            boardView[rowIndex][colIndex] != "b" &&
-            boardView[rowIndex][colIndex] != "s" &&
-            boardView[rowIndex][colIndex] != "bs"
-          ) {
-            boardView[rowIndex][colIndex] = "g";
-            i++;
-          }
+        for (let i = 0; i < WUMPUSNumber; i++) {
+          let x, y;
+          do {                                           //place wuppus
+              x = getRandomInt(2, SIZE - 1);
+              y = getRandomInt(2, SIZE - 1);
+          } while (boardView[x][y] !== EMPTY);
+          boardView[x][y] = WUMPUS;
         }
-      }
+          
+        for (let i = 0; i < GOLDNumber; i++) {
+          let x,y;
+          do {                                    //place gold
+              x = getRandomInt(3, SIZE - 1);
+              y = getRandomInt(3, SIZE - 1);
+          } while (boardView[x][y] !== EMPTY);
+          boardView[x][y] = GOLD;
+        }
+          
+       console.log(boardView," is board view")
 
-      function setPits() {
-        for (let i = 0; i < pitNo; ) {
-          let x = Math.floor(Math.random() * 100 + 1);
-          if (!wumpusArray.includes(x) && x != 2 && x != 11) {
-            let rowIndex = getIndex_x_fromNumber(x);
-            let colIndex = getIndex_y_fromNumber(x);
-            boardView[rowIndex][colIndex] = "p";
-            if (rowIndex - 1 >= 0) {
-              if (boardView[rowIndex - 1][colIndex] != "w") {
-                if (boardView[rowIndex - 1][colIndex] == "s")
-                  boardView[rowIndex - 1][colIndex] = "bs";
-                else boardView[rowIndex - 1][colIndex] = "b";
-              }
-            }
-            if (colIndex - 1 >= 0) {
-              if (boardView[rowIndex][colIndex - 1] != "w") {
-                if (boardView[rowIndex][colIndex - 1] == "s")
-                  boardView[rowIndex][colIndex - 1] = "bs";
-                else boardView[rowIndex][colIndex - 1] = "b";
-              }
-            }
-            if (rowIndex + 1 <= 9) {
-              if (boardView[rowIndex + 1][colIndex] != "w") {
-                if (boardView[rowIndex + 1][colIndex] == "s")
-                  boardView[rowIndex + 1][colIndex] = "bs";
-                else boardView[rowIndex + 1][colIndex] = "b";
-              }
-            }
-            if (colIndex + 1 <= 9) {
-              if (boardView[rowIndex][colIndex + 1] != "w") {
-                if (boardView[rowIndex][colIndex + 1] == "s")
-                  boardView[rowIndex][colIndex + 1] = "bs";
-                else boardView[rowIndex][colIndex + 1] = "b";
-              }
-            }
-            // wumpusArray.push(x);
-            // document.getElementById(x).innerText="red";
-            i++;
-          }
-        }
-        // console.log(wumpusArray);
-        console.log(boardView);
       }
+      function validCheck(i, j) {
+        return i >= 0 && i < SIZE && j >= 0 && j < SIZE;
+      }
+      function checkAdjacentCell(i, j) {
+        if(boardView[i][j] === PIT) return PIT;
+        else if(boardView[i][j] === WUMPUS) return WUMPUS;
+        else if(boardView[i][j] === GOLD){
+          //boardView[i][j] = EMPTY;
+          return GOLD;
+        }
+
+        let hasPit=false, hasWumpus=false;
+        const directions = [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ];
+        for (const [px, py] of directions) {
+          const x = i + px;
+          const y = j + py;
+          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit=true;
+          else if (validCheck(x, y) && boardView[x][y] === WUMPUS) hasWumpus=true;
+
+        }
+      
+        if(hasPit && hasWumpus) return BREEZEstench;
+        else if(hasPit) return BREEZE;
+        else if(hasWumpus) return STENCH;
+        else return EMPTY;   
+    }
 
       function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -360,84 +340,37 @@
         let theDiv = document.getElementById(posToDivID(x, y));
         theDiv.classList.add("visited");
         theDiv.classList.add("Nvisited");
-        if (boardView[x][y] == "s") theDiv.classList.add("snitchCell");
-        else if (boardView[x][y] == "b") theDiv.classList.add("breezeCell");
-        else if (boardView[x][y] == "bs") theDiv.classList.add("doubleCell");
-        else if (boardView[x][y] == "w") theDiv.classList.add("wumpusCell");
-        else if (boardView[x][y] == "p") theDiv.classList.add("pitCell");
-        else if (boardView[x][y] == "g") theDiv.classList.add("goldCell");
+        if (checkAdjacentCell(x,y) == "s") theDiv.classList.add("snitchCell");
+        else if (checkAdjacentCell(x,y) == "b") theDiv.classList.add("breezeCell");
+        else if (checkAdjacentCell(x,y) == "bs") theDiv.classList.add("doubleCell");
+        else if (checkAdjacentCell(x,y) == "w") theDiv.classList.add("wumpusCell");
+        else if (checkAdjacentCell(x,y) == "p") theDiv.classList.add("pitCell");
+        else if (checkAdjacentCell(x,y) == "g") theDiv.classList.add("goldCell");
 
-        if (boardView[x][y] == "p" || boardView[x][y] == "w") {
-          //alert("Game Over");
+        if (checkAdjacentCell(x,y) == "p" || checkAdjacentCell(x,y) == "w") {
+          alert("Game Over");
           //location.reload();
           console.log("Game over for wumpus and pit : ", x, " ", y);
         }
 
-        if (boardView[x][y] == "g") found_gold++;
-        if (found_gold == goldNo) {
-          //alert("Congratulation Game Finished");
+        if (checkAdjacentCell(x,y) == "g") found_gold++;
+        if (found_gold == GOLDNumber) {
+          alert("Congratulation Game Finished");
           //location.reload();
           console.log("Game over for gold : ", x, " ", y);
         }
       }
-      document.onkeydown = function (event) {
-        switch (event.keyCode) {
-          case 37:
-            //    alert('Left key');
-            if (myPos_Y != 0) {
-              let theDiv = document.getElementById(
-                posToDivID(myPos_X, myPos_Y)
-              );
-              theDiv.classList.remove("Nvisited");
-              myPos_Y--;
-              setAttribute();
-            }
-            break;
-          case 38:
-            //    alert('Up key');
-            if (myPos_X != 0) {
-              let theDiv = document.getElementById(
-                posToDivID(myPos_X, myPos_Y)
-              );
-              theDiv.classList.remove("Nvisited");
-              myPos_X--;
-              setAttribute();
-            }
-            break;
-          case 39:
-            //    alert('Right key');
-            if (myPos_Y != 9) {
-              let theDiv = document.getElementById(
-                posToDivID(myPos_X, myPos_Y)
-              );
-              theDiv.classList.remove("Nvisited");
-              myPos_Y++;
-              setAttribute();
-            }
-            break;
-          case 40:
-            //    alert('Down key');
-            if (myPos_X != 9) {
-              let theDiv = document.getElementById(
-                posToDivID(myPos_X, myPos_Y)
-              );
-              theDiv.classList.remove("Nvisited");
-              myPos_X++;
-              setAttribute();
-            }
-            break;
-        }
-      };
+      
 
       const getIndexFromNumber = (num) => ({
         x: Math.floor(num / 10),
         y: num % 10,
       });
 
-      setAttribute(0, 0);
-      setWumpus();
-      setPits();
-      setGold();
+      // await setBoard();
+      // setAttribute(0, 0);         //set starting point
+      
+     
 
       async function aiMovement(lowestPath) {
         let lastPath = lowestPath.length - 1;
@@ -468,7 +401,7 @@
         const { x: rowIndex, y: colIndex } = getIndexFromNumber(
           lowestPath[lastPath]
         );
-        return boardView[rowIndex][colIndex];
+        return checkAdjacentCell(rowIndex,colIndex);
       }
 
       function killWumpus(pointX, pointY) {
@@ -508,10 +441,7 @@
           [0, -1],
         ];
 
-        startGame() {
-          this.board[this.agentX][this.agentY] = EMPTY;
-        }
-
+      
         async initiateTheGame() {
           //this.game = new WumpusWorld();
           //this.game.createBoard();
@@ -523,10 +453,7 @@
           let count = 0;
           //await this.findBestMove();
           while (this.gameOver === false) {
-            count++;
-            console.log("Here are agin find cell for empty cell");
             await this.findBestMove();
-
             if (this.gameOver === false) {
               console.log("Probability part started");
               await this.createSaveMove();
@@ -581,11 +508,7 @@
             this.agentY = lowestPoint[1];
             this.totalPoint -= lowestPath.length - 1;
             //count++;
-          } while (
-            this.gameOver === false &&
-            checkArray.length !== 0 &&
-            count < 5
-          );
+          } while (this.gameOver === false && checkArray.length !== 0  );
 
           for (let row of this.board) {
             console.log(row.join("    "));
@@ -816,10 +739,11 @@
                 //console.log(this.board);
                 //console.log(this.board[x])
                 if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                  if (this.board[x][y] === STENCH) this.board[x][y] = EMPTY;
-                  else if (this.board[x][y] === BREEZEstench)
-                    this.board[x][y] = BREEZE;
+                  // if (this.board[x][y] === STENCH) this.board[x][y] = EMPTY;
+                  // else if (this.board[x][y] === BREEZEstench)
+                  //   this.board[x][y] = BREEZE;
                   //this.board[x][y] = this.game.passingMove(x, y);
+                  this.board[x][y] = checkAdjacentCell(x,y);
                 }
               }
               //this.totalPoint -= 1;
@@ -983,8 +907,13 @@
         }
       }
 
-      const agent = new Agent();
-      agent.initiateTheGame();
+      async function startGame(){
+        await setBoard();
+        setAttribute(0,0);
+        const agent = new Agent();
+        agent.initiateTheGame();
+      }
+      
     </script>
   </body>
 </html>
