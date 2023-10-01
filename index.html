@@ -47,6 +47,22 @@
         background-image: url(agent.jpeg);
         background-size: 50px 50px;
       }
+      .goldBreez {
+        background-image: url(GB.png);
+        background-size: 50px 50px;
+      }
+      .goldStench {
+        background-image: url(GS.png);
+        background-size: 50px 50px;
+      }
+      .goldBoth {
+        background-image: url(GBS.png);
+        background-size: 50px 50px;
+      }
+      .wumpus_dead{
+        background-image: url(wumpus_dead.png);
+        background-size: 50px 50px;
+      }
     </style>
   </head>
 
@@ -173,6 +189,10 @@
         <div class="cell" id="99"></div>
       </div>
       <div> <button onclick="startGame()">Start Game</button> </div>
+      <div><p id="TotalPoint">Total Point: 0</p></div>
+      <div><p id="TotalGoldFound">Total GOLD found: 0</p></div>
+      <div><p id="TotalWumpusKill">Total Wumpus Kill: 0</p></div>
+      <div><p id="arrowRemain">Arrow Remain: 0</p></div>
     </center>
     <script>
       const SIZE = 10;
@@ -206,6 +226,9 @@
       let myPos_Y = 0;
       let found_gold = 0;
       let SLEEPINGTIME = 200;
+      let TotalPoint=1;
+      let TotalWumpusKill=0;
+      let arrowRemain=WUMPUSNumber;
 
 
       function posToDivID(inX, inY) {
@@ -230,7 +253,7 @@
           boardView[i][j] = EMPTY; // Initialize with empty strings
         }
       }
-
+      document.getElementById("arrowRemain").innerHTML = `Arrow remain: ${arrowRemain}`;
      
 
       function getIndex_x_fromNumber(num) {
@@ -336,6 +359,8 @@
       }
 
       function setAttribute(x, y) {
+        TotalPoint--;
+        document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
         let textt = "";
         let theDiv = document.getElementById(posToDivID(x, y));
         theDiv.classList.add("visited");
@@ -349,16 +374,12 @@
 
         if (checkAdjacentCell(x,y) == "p" || checkAdjacentCell(x,y) == "w") {
           alert("Game Over");
+          agent.gameOver = true;
           //location.reload();
           console.log("Game over for wumpus and pit : ", x, " ", y);
         }
 
-        if (checkAdjacentCell(x,y) == "g") found_gold++;
-        if (found_gold == GOLDNumber) {
-          alert("Congratulation Game Finished");
-          //location.reload();
-          console.log("Game over for gold : ", x, " ", y);
-        }
+        
       }
       
 
@@ -406,12 +427,63 @@
 
       function killWumpus(pointX, pointY) {
         if (boardView[pointX][pointY] === WUMPUS) {
+          TotalPoint +=1000;
+          TotalWumpusKill++;
+          document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
+          document.getElementById("TotalWumpusKill").innerHTML = `Total wumpus kill: ${TotalWumpusKill}`;
           boardView[pointX][pointY] = EMPTY; //later try to adjus sorounding
-          alert("kill wumpus");
+          //boardView[pointX][pointY] = checkAdjacentCell(pointX,pointY);
+          let theDiv = document.getElementById(posToDivID(pointX, pointY));
+          theDiv.classList.add("wumpus_dead");
+          //alert("kill wumpus");
           return true;
         } else {
+          TotalPoint -= 10;
           return false;
         }
+        arrowRemain--;
+        document.getElementById("arrowRemain").innerHTML = `Arrow remain: ${arrowRemain}`;
+      }
+
+      function sensorForGold(i,j){
+        
+        TotalPoint+=1000;
+        document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
+          found_gold++;
+          document.getElementById("TotalGoldFound").innerHTML = `Total gold found: ${found_gold}`;
+          
+        if (found_gold == GOLDNumber) {
+          alert("Congratulation Game Finished");
+          agent.gameOver = true;
+          //location.reload();
+          console.log("Game over for gold ");
+        }
+        let hasPit=false, hasWumpus=false;
+        const directions = [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ];
+        for (const [px, py] of directions) {
+          const x = i + px;
+          const y = j + py;
+          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit=true;
+          else if (validCheck(x, y) && boardView[x][y] === WUMPUS) hasWumpus=true;
+        }
+        let theDiv = document.getElementById(posToDivID(i, j));
+      
+        if(hasPit && hasWumpus){
+          theDiv.classList.add("goldBoth");
+           return BREEZEstench;
+        }
+        else if(hasPit){ 
+          theDiv.classList.add("goldBreez");
+          return BREEZE;}
+        else if(hasWumpus){
+          theDiv.classList.add("goldStench");
+          return STENCH;}
+        else return EMPTY;
       }
 
       //agent.initiateTheGame();
@@ -432,6 +504,7 @@
           this.totalPoint = 0;
           this.numberOfWumpusKill = 0;
           this.PITProbability = 1;
+          this.ArrowRemain=WUMPUSNumber;
         }
 
         directions = [
@@ -502,7 +575,7 @@
             console.log("this is from forntent: ", status);
             //this.game.passingMove(lowestPoint[0], lowestPoint[1]); //send the point or the path to forntent
             this.checkStatus(status); //check  if the gane end
-            if (status === GOLD) status = EMPTY;
+            if (status === GOLD) status = sensorForGold(lowestPoint[0],lowestPoint[1]);
             this.board[lowestPoint[0]][lowestPoint[1]] = status;
             this.agentX = lowestPoint[0];
             this.agentY = lowestPoint[1];
@@ -581,7 +654,7 @@
           let status = await aiMovement(path);
           console.log("this is from forntent: ", status); //send the point or the path to forntent
           //if (status === GOLD) status = this.game.passingMove(i, j);
-          if (status === GOLD) status = EMPTY;
+          if (status === GOLD) status = sensorForGold(i,j);
           this.checkStatus(status); //check  if the gane end
           console.log(status, " is the status of ", i, " - ", j);
           this.board[i][j] = status;
@@ -663,8 +736,9 @@
           console.log(`Coordinates: (${highestX}, ${highestY})`);
 
           //kill here
-          if (highestValue >= 2) {
+          if (highestValue >= 2 && this.ArrowRemain>0) {
             //@update check here that arrow are here
+            this.ArrowRemain--;
             console.log("make a movement for kill wumpus");
             let i, j;
             for (const [px, py] of this.directions) {
@@ -728,21 +802,14 @@
               console.log("Here wumpus are killed###########################");
               this.numberOfWumpusKill++;
 
-              //try adjust for wumpus
-              //console.log(highestX," ",highestY);
-              //console.log(this.board)
+              
               for (const [px, py] of this.directions) {
                 //update currrent board
                 const x = highestX + px;
                 const y = highestY + py;
-                //console.log(x," ",y," ",px," ",py)
-                //console.log(this.board);
-                //console.log(this.board[x])
+               
                 if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                  // if (this.board[x][y] === STENCH) this.board[x][y] = EMPTY;
-                  // else if (this.board[x][y] === BREEZEstench)
-                  //   this.board[x][y] = BREEZE;
-                  //this.board[x][y] = this.game.passingMove(x, y);
+                 
                   this.board[x][y] = checkAdjacentCell(x,y);
                 }
               }
@@ -907,10 +974,10 @@
         }
       }
 
+      const agent = new Agent();
       async function startGame(){
         await setBoard();
         setAttribute(0,0);
-        const agent = new Agent();
         agent.initiateTheGame();
       }
       
