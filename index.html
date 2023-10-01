@@ -4,12 +4,49 @@
     <script src="./../Move/Move.js"></script>
 
     <style>
+
+      .left-side{
+          width: 40%;
+          float: left; 
+          height: 100vh; 
+          border: 1px solid #c09c28; 
+          box-sizing: border-box; 
+      }
+
+        .right-side {
+            width: 60%; 
+            float: left;
+            height: 100vh; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box; 
+        }
+
+        /* Optional: Add some styling to the divs */
+        .left-side {
+            background-color: #f0f0f0;
+        }
+
+        .right-side {
+            background-color: #e7eaec;
+        }
+
       .cell {
         height: 50px;
         width: 50px;
         border: 1px solid black;
         display: inline-block;
         background-color: rgb(37, 35, 35);
+        padding: 1px;
+      }
+      .cell2 {
+        height: 50px;
+        width: 30px;
+        border: 1px solid black;
+        display: inline-block;
+        background-color: rgb(253, 249, 249);
+        text-align: center; /* Center text horizontally */
+        line-height: 50px; /* Center text vertically */
+        font-size: 16px;
         padding: 1px;
       }
       .visited {
@@ -63,10 +100,147 @@
         background-image: url(wumpus_dead.png);
         background-size: 50px 50px;
       }
+      .canPit{
+        background-color: rgb(0, 0, 0);
+      }
+      .canWumpus{
+        background-color: rgb(236, 7, 7);
+      }
+      .canBoth{
+        background-color: rgb(68, 34, 68);
+      }
+      .safe{
+        background-color: rgb(103, 241, 10);
+      }
     </style>
   </head>
 
   <body>
+    <div class="left-side">
+      <center>
+        <div>
+          <div class="cell2" id="000"></div>
+          <div class="cell2" id="001"></div>
+          <div class="cell2" id="002"></div>
+          <div class="cell2" id="003"></div>
+          <div class="cell2" id="004"></div>
+          <div class="cell2" id="005"></div>
+          <div class="cell2" id="006"></div>
+          <div class="cell2" id="007"></div>
+          <div class="cell2" id="008"></div>
+          <div class="cell2" id="009"></div>
+        </div>
+        <div>
+          <div class="cell2" id="012"></div>
+          <div class="cell2" id="011"></div>
+          <div class="cell2" id="013"></div>
+          <div class="cell2" id="010"></div>
+          <div class="cell2" id="014"></div>
+          <div class="cell2" id="015"></div>
+          <div class="cell2" id="016"></div>
+          <div class="cell2" id="017"></div>
+          <div class="cell2" id="018"></div>
+          <div class="cell2" id="019"></div>
+        </div>
+        <div>
+          <div class="cell2" id="020"></div>
+          <div class="cell2" id="021"></div>
+          <div class="cell2" id="022"></div>
+          <div class="cell2" id="023"></div>
+          <div class="cell2" id="024"></div>
+          <div class="cell2" id="025"></div>
+          <div class="cell2" id="026"></div>
+          <div class="cell2" id="027"></div>
+          <div class="cell2" id="028"></div>
+          <div class="cell2" id="029"></div>
+        </div>
+        <div>
+          <div class="cell2" id="030"></div>
+          <div class="cell2" id="031"></div>
+          <div class="cell2" id="032"></div>
+          <div class="cell2" id="033"></div>
+          <div class="cell2" id="034"></div>
+          <div class="cell2" id="035"></div>
+          <div class="cell2" id="036"></div>
+          <div class="cell2" id="037"></div>
+          <div class="cell2" id="038"></div>
+          <div class="cell2" id="039"></div>
+        </div>
+        <div>
+          <div class="cell2" id="040"></div>
+          <div class="cell2" id="041"></div>
+          <div class="cell2" id="042"></div>
+          <div class="cell2" id="043"></div>
+          <div class="cell2" id="044"></div>
+          <div class="cell2" id="045"></div>
+          <div class="cell2" id="046"></div>
+          <div class="cell2" id="047"></div>
+          <div class="cell2" id="048"></div>
+          <div class="cell2" id="049"></div>
+        </div>
+        <div>
+          <div class="cell2" id="050"></div>
+          <div class="cell2" id="051"></div>
+          <div class="cell2" id="052"></div>
+          <div class="cell2" id="053"></div>
+          <div class="cell2" id="054"></div>
+          <div class="cell2" id="055"></div>
+          <div class="cell2" id="056"></div>
+          <div class="cell2" id="057"></div>
+          <div class="cell2" id="058"></div>
+          <div class="cell2" id="059"></div>
+        </div>
+        <div>
+          <div class="cell2" id="060"></div>
+          <div class="cell2" id="061"></div>
+          <div class="cell2" id="062"></div>
+          <div class="cell2" id="063"></div>
+          <div class="cell2" id="064"></div>
+          <div class="cell2" id="065"></div>
+          <div class="cell2" id="066"></div>
+          <div class="cell2" id="067"></div>
+          <div class="cell2" id="068"></div>
+          <div class="cell2" id="069"></div>
+        </div>
+        <div>
+          <div class="cell2" id="070"></div>
+          <div class="cell2" id="071"></div>
+          <div class="cell2" id="072"></div>
+          <div class="cell2" id="073"></div>
+          <div class="cell2" id="074"></div>
+          <div class="cell2" id="075"></div>
+          <div class="cell2" id="076"></div>
+          <div class="cell2" id="077"></div>
+          <div class="cell2" id="078"></div>
+          <div class="cell2" id="079"></div>
+        </div>
+        <div>
+          <div class="cell2" id="080"></div>
+          <div class="cell2" id="081"></div>
+          <div class="cell2" id="082"></div>
+          <div class="cell2" id="083"></div>
+          <div class="cell2" id="084"></div>
+          <div class="cell2" id="085"></div>
+          <div class="cell2" id="086"></div>
+          <div class="cell2" id="087"></div>
+          <div class="cell2" id="088"></div>
+          <div class="cell2" id="089"></div>
+        </div>
+        <div>
+          <div class="cell2" id="090"></div>
+          <div class="cell2" id="091"></div>
+          <div class="cell2" id="092"></div>
+          <div class="cell2" id="093"></div>
+          <div class="cell2" id="094"></div>
+          <div class="cell2" id="095"></div>
+          <div class="cell2" id="096"></div>
+          <div class="cell2" id="097"></div>
+          <div class="cell2" id="098"></div>
+          <div class="cell2" id="099"></div>
+        </div>
+      </center>
+    </div>
+    <div class="right-side">
     <center>
       <div>
         <div class="cell" id="00"></div>
@@ -199,6 +373,7 @@
       <div><p id="arrowRemain">Arrow Remain: 0</p></div>
     
     </center>
+  </div>
     <script>
       const SIZE = 10;
       const PITNumber = 6;
@@ -230,7 +405,7 @@
       let myPos_X = 0;
       let myPos_Y = 0;
       let found_gold = 0;
-      let SLEEPINGTIME = 200;
+      let SLEEPINGTIME = 100;
       let TotalPoint=1;
       let TotalWumpusKill=0;
       let arrowRemain=WUMPUSNumber;
@@ -568,7 +743,8 @@
             "Here game started-----------------------------------------------"
           );
 
-          this.board[this.agentX][this.agentY] = EMPTY;
+          this.board[this.agentX][this.agentY] = checkAdjacentCell(this.agentX,this.agentY);
+          agentMind(this.agentX, this.agentY, this.board[this.agentX][this.agentY]);
           let count = 0;
           //await this.findBestMove();
           while (this.gameOver === false) {
@@ -619,9 +795,11 @@
 
             let status = await aiMovement(lowestPath);
             console.log("this is from forntent: ", status);
+            
             //this.game.passingMove(lowestPoint[0], lowestPoint[1]); //send the point or the path to forntent
             this.checkStatus(status); //check  if the gane end
             if (status === GOLD) status = sensorForGold(lowestPoint[0],lowestPoint[1]);
+            agentMind(lowestPoint[0],lowestPoint[1],status);
             this.board[lowestPoint[0]][lowestPoint[1]] = status;
             this.agentX = lowestPoint[0];
             this.agentY = lowestPoint[1];
@@ -703,6 +881,7 @@
           if (status === GOLD) status = sensorForGold(i,j);
           this.checkStatus(status); //check  if the gane end
           console.log(status, " is the status of ", i, " - ", j);
+          agentMind(i,j,status);
           this.board[i][j] = status;
           this.agentX = i;
           this.agentY = j;
@@ -786,36 +965,36 @@
             //@update check here that arrow are here
             this.ArrowRemain--;
             console.log("make a movement for kill wumpus");
-            let i, j;
+            let i, j,lowcost=Number.MAX_VALUE,lowcostPath;
+            const graph = new Graph();
+            graph.createGraph(this.board);
+            console.log(this.agentX,"===",this.agentY);
             for (const [px, py] of this.directions) {
               const x = highestX + px;
               const y = highestY + py;
               if (
-                this.validCheck(x, y) &&
-                (this.board[x][y] === EMPTY ||
-                  this.board[x][y] === BREEZEstench ||
-                  this.board[x][y] === BREEZE ||
-                  this.board[x][y] === STENCH)
-              ) {
-                i = x;
-                j = y;
-                break;
+                this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
+                const path = graph.BFS(this.agentX * SIZE + this.agentY,x * SIZE + y);
+                console.log(x," -- ",y,"  ",path,path.length)
+                if(path && path.length<lowcost){
+                  lowcostPath = path;
+                  lowcost = path.length;
+                  i = x;
+                  j = y;
+                }
+                    
               }
             }
-            const graph = new Graph();
-            graph.createGraph(this.board);
-            const path = graph.BFS(
-              this.agentX * SIZE + this.agentY,
-              i * SIZE + j
-            );
+            console.log("after for loop")
+            
             this.agentX = i;
             this.agentY = j;
-            console.log(i, " ", j, " in kill part ", path);
-            SLEEPINGTIME = 500;
-            let status = await aiMovement(path);
+            console.log(i, " ", j," ",this.agentX," ",this.agentY, " in kill part ", lowcostPath);
+            //SLEEPINGTIME = 500;
+            let status = await aiMovement(lowcostPath);
             //send the point or the path to forntent
             //this.checkStatus(status)                //check  if the gane end
-            this.totalPoint -= path.length - 1 + 10;
+            this.totalPoint -= lowcostPath.length - 1 + 10;
 
             let isKill;
             if (status) isKill = await killWumpus(highestX, highestY);
@@ -836,6 +1015,7 @@
                 " ",
                 highestY
               );
+              
               let status = await aiMovement([
                 this.agentX * SIZE + this.agentY,
                 highestX * SIZE + highestY,
@@ -843,6 +1023,7 @@
               console.log("this is from forntent: ", status);
               console.log(status, " is the status of ", i, " - ", j);
               this.board[i][j] = status;
+              agentMind(highestX,highestY,status);
               this.agentX = highestX;
               this.agentY = highestY;
               console.log("Here wumpus are killed###########################");
@@ -855,8 +1036,8 @@
                 const y = highestY + py;
                
                 if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                 
                   this.board[x][y] = checkAdjacentCell(x,y);
+                  agentMind(x,y,this.board[x][y]);
                 }
               }
               //this.totalPoint -= 1;
@@ -972,7 +1153,7 @@
             }
           }
 
-          //console.log(this.adj," is after create graph")
+          console.log(this.adj," is after create graph")
         }
 
         addEdge(u, v) {
@@ -1032,6 +1213,77 @@
         await setBoard();
         setAttribute(9,0);
         agent.initiateTheGame();
+      }
+
+
+      const directions = [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ];
+
+      const agentBoard = Array(SIZE).fill(null).map(() => Array(SIZE).fill(EMPTY));
+      function agentMind(i,j,sensor){
+        // let theDiv = document.getElementById(`0${posToDivID(x, y)}`);
+        // theDiv.classList.add("visited");
+        if(sensor == EMPTY){
+          agentBoard[i][j] = SAFE;
+          for (const [px, py] of directions) {
+          const x = i + px;
+          const y = j + py;
+          if (validCheck(x, y)){
+            changeSorounding("safe",x,y);
+            agentBoard[x][y] = SAFE;
+          }
+        }
+        }else if(sensor===BREEZE){
+          for (const [px, py] of directions) {
+          const x = i + px;
+          const y = j + py;
+            if (validCheck(x, y) && agentBoard[x][y] === EMPTY ){
+              changeSorounding("canPit",x,y);
+              agentBoard[x][y] = CANpit;
+            }else if(validCheck(x, y) && agentBoard[x][y] === CANwumpus){
+              changeSorounding("canBoth",x,y);
+              agentBoard[x][y] = CANboth;
+            }
+          }
+        }
+        else if(sensor===STENCH){
+          for (const [px, py] of directions) {
+          const x = i + px;
+          const y = j + py;
+            if (validCheck(x, y) && agentBoard[x][y] === EMPTY){
+              changeSorounding("canWumpus",x,y);
+              agentBoard[x][y] = CANwumpus;
+            }else if(validCheck(x, y) && agentBoard[x][y] === CANpit){
+              changeSorounding("canBoth",x,y);
+              agentBoard[x][y] = CANboth;
+            }
+          }
+        }
+        // else if(sensor==="kill"){
+        //   for (const [px, py] of directions) {
+        //   const x = i + px;
+        //   const y = j + py;
+        //     if (validCheck(x, y) && agentBoard[x][y] === STENCH){
+        //       changeSorounding("sa",x,y);
+        //       agentBoard[x][y] = CANwumpus;
+        //     }else if(validCheck(x, y) && agentBoard[x][y] === CANpit){
+        //       changeSorounding("b?",x,y);
+        //       agentBoard[x][y] = CANboth;
+        //     }
+        //   }
+        // }
+        
+      }
+
+      function changeSorounding(text,x,y){
+        //console.log(`0${posToDivID(x, y)}`,x,y);
+        //document.getElementById(`0${posToDivID(x, y)}`).innerHTML = `${text}`;
+         let theDiv = document.getElementById(`0${posToDivID(x, y)}`);
+         theDiv.classList.add(text);
       }
       
     </script>
