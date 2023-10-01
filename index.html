@@ -295,8 +295,8 @@
         for (let i = 0; i < PITNumber; i++) {
           let x, y;
           do {
-              x = getRandomInt(1, SIZE - 1);
-              y = getRandomInt(1, SIZE - 1);
+              x = getRandomInt(0, SIZE - 1);
+              y = getRandomInt(0, SIZE - 1);
           } while (boardView[x][y] !== EMPTY);
           boardView[x][y] = PIT;
         }
@@ -304,8 +304,8 @@
         for (let i = 0; i < WUMPUSNumber; i++) {
           let x, y;
           do {                                           //place wuppus
-              x = getRandomInt(2, SIZE - 1);
-              y = getRandomInt(2, SIZE - 1);
+              x = getRandomInt(0, SIZE - 1);
+              y = getRandomInt(0, SIZE - 1);
           } while (boardView[x][y] !== EMPTY);
           boardView[x][y] = WUMPUS;
         }
@@ -313,8 +313,8 @@
         for (let i = 0; i < GOLDNumber; i++) {
           let x,y;
           do {                                    //place gold
-              x = getRandomInt(3, SIZE - 1);
-              y = getRandomInt(3, SIZE - 1);
+              x = getRandomInt(0, SIZE - 1);
+              y = getRandomInt(0, SIZE - 1);
           } while (boardView[x][y] !== EMPTY);
           boardView[x][y] = GOLD;
         }
@@ -493,7 +493,7 @@
           this.board = Array(SIZE)
             .fill(null)
             .map(() => Array(SIZE).fill(UNCOVER));
-          this.agentX = 0;
+          this.agentX = 9;
           this.agentY = 0;
           this.agentHasGold = false;
           this.agentHasArrow = true;
@@ -977,7 +977,7 @@
       const agent = new Agent();
       async function startGame(){
         await setBoard();
-        setAttribute(0,0);
+        setAttribute(9,0);
         agent.initiateTheGame();
       }
       
