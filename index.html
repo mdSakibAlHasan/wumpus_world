@@ -4,31 +4,30 @@
     <script src="./../Move/Move.js"></script>
 
     <style>
-
-      .left-side{
-          width: 40%;
-          float: left; 
-          height: 100vh; 
-          border: 1px solid #c09c28; 
-          box-sizing: border-box; 
+      .left-side {
+        width: 40%;
+        float: left;
+        height: 100vh;
+        border: 1px solid #c09c28;
+        box-sizing: border-box;
       }
 
-        .right-side {
-            width: 60%; 
-            float: left;
-            height: 100vh; 
-            border: 1px solid #ccc; 
-            box-sizing: border-box; 
-        }
+      .right-side {
+        width: 60%;
+        float: left;
+        height: 100vh;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
 
-        /* Optional: Add some styling to the divs */
-        .left-side {
-            background-color: #f0f0f0;
-        }
+      /* Optional: Add some styling to the divs */
+      .left-side {
+        background-color: #f0f0f0;
+      }
 
-        .right-side {
-            background-color: #e7eaec;
-        }
+      .right-side {
+        background-color: #e7eaec;
+      }
 
       .cell {
         height: 50px;
@@ -96,20 +95,20 @@
         background-image: url(GBS.png);
         background-size: 50px 50px;
       }
-      .wumpus_dead{
+      .wumpus_dead {
         background-image: url(wumpus_dead.png);
         background-size: 50px 50px;
       }
-      .canPit{
+      .canPit {
         background-color: rgb(0, 0, 0);
       }
-      .canWumpus{
+      .canWumpus {
         background-color: rgb(236, 7, 7);
       }
-      .canBoth{
+      .canBoth {
         background-color: rgb(68, 34, 68);
       }
-      .safe{
+      .safe {
         background-color: rgb(103, 241, 10);
       }
     </style>
@@ -241,139 +240,142 @@
       </center>
     </div>
     <div class="right-side">
-    <center>
-      <div>
-        <div class="cell" id="00"></div>
-        <div class="cell" id="01"></div>
-        <div class="cell" id="02"></div>
-        <div class="cell" id="03"></div>
-        <div class="cell" id="04"></div>
-        <div class="cell" id="05"></div>
-        <div class="cell" id="06"></div>
-        <div class="cell" id="07"></div>
-        <div class="cell" id="08"></div>
-        <div class="cell" id="09"></div>
-      </div>
-      <div>
-        <div class="cell" id="10"></div>
-        <div class="cell" id="11"></div>
-        <div class="cell" id="12"></div>
-        <div class="cell" id="13"></div>
-        <div class="cell" id="14"></div>
-        <div class="cell" id="15"></div>
-        <div class="cell" id="16"></div>
-        <div class="cell" id="17"></div>
-        <div class="cell" id="18"></div>
-        <div class="cell" id="19"></div>
-      </div>
-      <div>
-        <div class="cell" id="20"></div>
-        <div class="cell" id="21"></div>
-        <div class="cell" id="22"></div>
-        <div class="cell" id="23"></div>
-        <div class="cell" id="24"></div>
-        <div class="cell" id="25"></div>
-        <div class="cell" id="26"></div>
-        <div class="cell" id="27"></div>
-        <div class="cell" id="28"></div>
-        <div class="cell" id="29"></div>
-      </div>
-      <div>
-        <div class="cell" id="30"></div>
-        <div class="cell" id="31"></div>
-        <div class="cell" id="32"></div>
-        <div class="cell" id="33"></div>
-        <div class="cell" id="34"></div>
-        <div class="cell" id="35"></div>
-        <div class="cell" id="36"></div>
-        <div class="cell" id="37"></div>
-        <div class="cell" id="38"></div>
-        <div class="cell" id="39"></div>
-      </div>
-      <div>
-        <div class="cell" id="40"></div>
-        <div class="cell" id="41"></div>
-        <div class="cell" id="42"></div>
-        <div class="cell" id="43"></div>
-        <div class="cell" id="44"></div>
-        <div class="cell" id="45"></div>
-        <div class="cell" id="46"></div>
-        <div class="cell" id="47"></div>
-        <div class="cell" id="48"></div>
-        <div class="cell" id="49"></div>
-      </div>
-      <div>
-        <div class="cell" id="50"></div>
-        <div class="cell" id="51"></div>
-        <div class="cell" id="52"></div>
-        <div class="cell" id="53"></div>
-        <div class="cell" id="54"></div>
-        <div class="cell" id="55"></div>
-        <div class="cell" id="56"></div>
-        <div class="cell" id="57"></div>
-        <div class="cell" id="58"></div>
-        <div class="cell" id="59"></div>
-      </div>
-      <div>
-        <div class="cell" id="60"></div>
-        <div class="cell" id="61"></div>
-        <div class="cell" id="62"></div>
-        <div class="cell" id="63"></div>
-        <div class="cell" id="64"></div>
-        <div class="cell" id="65"></div>
-        <div class="cell" id="66"></div>
-        <div class="cell" id="67"></div>
-        <div class="cell" id="68"></div>
-        <div class="cell" id="69"></div>
-      </div>
-      <div>
-        <div class="cell" id="70"></div>
-        <div class="cell" id="71"></div>
-        <div class="cell" id="72"></div>
-        <div class="cell" id="73"></div>
-        <div class="cell" id="74"></div>
-        <div class="cell" id="75"></div>
-        <div class="cell" id="76"></div>
-        <div class="cell" id="77"></div>
-        <div class="cell" id="78"></div>
-        <div class="cell" id="79"></div>
-      </div>
-      <div>
-        <div class="cell" id="80"></div>
-        <div class="cell" id="81"></div>
-        <div class="cell" id="82"></div>
-        <div class="cell" id="83"></div>
-        <div class="cell" id="84"></div>
-        <div class="cell" id="85"></div>
-        <div class="cell" id="86"></div>
-        <div class="cell" id="87"></div>
-        <div class="cell" id="88"></div>
-        <div class="cell" id="89"></div>
-      </div>
-      <div>
-        <div class="cell" id="90"></div>
-        <div class="cell" id="91"></div>
-        <div class="cell" id="92"></div>
-        <div class="cell" id="93"></div>
-        <div class="cell" id="94"></div>
-        <div class="cell" id="95"></div>
-        <div class="cell" id="96"></div>
-        <div class="cell" id="97"></div>
-        <div class="cell" id="98"></div>
-        <div class="cell" id="99"></div>
-      </div>
-     <div>Input your demo file <input type="file" id="fileInput" accept=".txt"></div> 
-     <br>
-      <div> <button onclick="startGame()">Start Game</button> 
-        <button onclick="restartGame()">Restart Game</button> 
-      </div>
-      <div><p id="TotalPoint">Total Point: 0</p></div>
-      <div><p id="TotalGoldFound">Total GOLD found: 0</p></div>
-      <div><p id="TotalWumpusKill">Total Wumpus Kill: 0</p></div>
-      <div><p id="arrowRemain">Arrow Remain: 0</p></div>
-    
-    </center>
-  </div>
+      <center>
+        <div>
+          <div class="cell" id="00"></div>
+          <div class="cell" id="01"></div>
+          <div class="cell" id="02"></div>
+          <div class="cell" id="03"></div>
+          <div class="cell" id="04"></div>
+          <div class="cell" id="05"></div>
+          <div class="cell" id="06"></div>
+          <div class="cell" id="07"></div>
+          <div class="cell" id="08"></div>
+          <div class="cell" id="09"></div>
+        </div>
+        <div>
+          <div class="cell" id="10"></div>
+          <div class="cell" id="11"></div>
+          <div class="cell" id="12"></div>
+          <div class="cell" id="13"></div>
+          <div class="cell" id="14"></div>
+          <div class="cell" id="15"></div>
+          <div class="cell" id="16"></div>
+          <div class="cell" id="17"></div>
+          <div class="cell" id="18"></div>
+          <div class="cell" id="19"></div>
+        </div>
+        <div>
+          <div class="cell" id="20"></div>
+          <div class="cell" id="21"></div>
+          <div class="cell" id="22"></div>
+          <div class="cell" id="23"></div>
+          <div class="cell" id="24"></div>
+          <div class="cell" id="25"></div>
+          <div class="cell" id="26"></div>
+          <div class="cell" id="27"></div>
+          <div class="cell" id="28"></div>
+          <div class="cell" id="29"></div>
+        </div>
+        <div>
+          <div class="cell" id="30"></div>
+          <div class="cell" id="31"></div>
+          <div class="cell" id="32"></div>
+          <div class="cell" id="33"></div>
+          <div class="cell" id="34"></div>
+          <div class="cell" id="35"></div>
+          <div class="cell" id="36"></div>
+          <div class="cell" id="37"></div>
+          <div class="cell" id="38"></div>
+          <div class="cell" id="39"></div>
+        </div>
+        <div>
+          <div class="cell" id="40"></div>
+          <div class="cell" id="41"></div>
+          <div class="cell" id="42"></div>
+          <div class="cell" id="43"></div>
+          <div class="cell" id="44"></div>
+          <div class="cell" id="45"></div>
+          <div class="cell" id="46"></div>
+          <div class="cell" id="47"></div>
+          <div class="cell" id="48"></div>
+          <div class="cell" id="49"></div>
+        </div>
+        <div>
+          <div class="cell" id="50"></div>
+          <div class="cell" id="51"></div>
+          <div class="cell" id="52"></div>
+          <div class="cell" id="53"></div>
+          <div class="cell" id="54"></div>
+          <div class="cell" id="55"></div>
+          <div class="cell" id="56"></div>
+          <div class="cell" id="57"></div>
+          <div class="cell" id="58"></div>
+          <div class="cell" id="59"></div>
+        </div>
+        <div>
+          <div class="cell" id="60"></div>
+          <div class="cell" id="61"></div>
+          <div class="cell" id="62"></div>
+          <div class="cell" id="63"></div>
+          <div class="cell" id="64"></div>
+          <div class="cell" id="65"></div>
+          <div class="cell" id="66"></div>
+          <div class="cell" id="67"></div>
+          <div class="cell" id="68"></div>
+          <div class="cell" id="69"></div>
+        </div>
+        <div>
+          <div class="cell" id="70"></div>
+          <div class="cell" id="71"></div>
+          <div class="cell" id="72"></div>
+          <div class="cell" id="73"></div>
+          <div class="cell" id="74"></div>
+          <div class="cell" id="75"></div>
+          <div class="cell" id="76"></div>
+          <div class="cell" id="77"></div>
+          <div class="cell" id="78"></div>
+          <div class="cell" id="79"></div>
+        </div>
+        <div>
+          <div class="cell" id="80"></div>
+          <div class="cell" id="81"></div>
+          <div class="cell" id="82"></div>
+          <div class="cell" id="83"></div>
+          <div class="cell" id="84"></div>
+          <div class="cell" id="85"></div>
+          <div class="cell" id="86"></div>
+          <div class="cell" id="87"></div>
+          <div class="cell" id="88"></div>
+          <div class="cell" id="89"></div>
+        </div>
+        <div>
+          <div class="cell" id="90"></div>
+          <div class="cell" id="91"></div>
+          <div class="cell" id="92"></div>
+          <div class="cell" id="93"></div>
+          <div class="cell" id="94"></div>
+          <div class="cell" id="95"></div>
+          <div class="cell" id="96"></div>
+          <div class="cell" id="97"></div>
+          <div class="cell" id="98"></div>
+          <div class="cell" id="99"></div>
+        </div>
+        <div>
+          Input your demo file
+          <input type="file" id="fileInput" accept=".txt" />
+        </div>
+        <br />
+        <div>
+          <button onclick="startGame()">Start Game</button>
+          <button onclick="restartGame()">Restart Game</button>
+        </div>
+        <div><p id="TotalPoint">Total Point: 0</p></div>
+        <div><p id="TotalGoldFound">Total GOLD found: 0</p></div>
+        <div><p id="TotalWumpusKill">Total Wumpus Kill: 0</p></div>
+        <div><p id="arrowRemain">Arrow Remain: 0</p></div>
+      </center>
+    </div>
     <script>
       const SIZE = 10;
       const PITNumber = 6;
@@ -394,7 +396,7 @@
       const CANpit = "cp";
       const CANwumpus = "cw";
       const CANboth = "cb";
-      const KILLwumpus = 'kw';
+      const KILLwumpus = "kw";
 
       var wumpusNo = 5;
       var pitNo = 6;
@@ -406,10 +408,9 @@
       let myPos_Y = 0;
       let found_gold = 0;
       let SLEEPINGTIME = 1000;
-      let TotalPoint=1;
-      let TotalWumpusKill=0;
-      let arrowRemain=WUMPUSNumber;
-
+      let TotalPoint = 1;
+      let TotalWumpusKill = 0;
+      let arrowRemain = WUMPUSNumber;
 
       function posToDivID(inX, inY) {
         //return cell number 01-99
@@ -433,8 +434,9 @@
           boardView[i][j] = EMPTY; // Initialize with empty strings
         }
       }
-      document.getElementById("arrowRemain").innerHTML = `Arrow remain: ${arrowRemain}`;
-     
+      document.getElementById(
+        "arrowRemain"
+      ).innerHTML = `Arrow remain: ${arrowRemain}`;
 
       function getIndex_x_fromNumber(num) {
         if (num <= 10) return 0;
@@ -453,33 +455,34 @@
         if (retValue == 0) return 9;
         else return retValue;
       }
-     
-    
+
       function getRandomInt(min, max) {
-          return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
       }
       let file;
       const array = [];
-          document.getElementById('fileInput').addEventListener('change', function (event) {
-             file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const fileContent = e.target.result;
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const fileContent = e.target.result;
 
-                    // Split the file content into lines
-                    const lines = fileContent.split('\n');
+              // Split the file content into lines
+              const lines = fileContent.split("\n");
 
-                    for (let i = 0; i < 10; i++) {
-                        array.push(Array.from(lines[i].trim())); // Convert each line to an array of characters
-                    }
-                    boardView = array;
-                  };
-                reader.readAsText(file);
-            }
+              for (let i = 0; i < 10; i++) {
+                array.push(Array.from(lines[i].trim())); // Convert each line to an array of characters
+              }
+              boardView = array;
+            };
+            reader.readAsText(file);
+          }
         });
       function setBoard() {
-          //   this.boardView=[
+        //   this.boardView=[
         //   [EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
         //   [EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY],
         //   [EMPTY,EMPTY,EMPTY  ,EMPTY,EMPTY,WUMPUS,PIT,GOLD,EMPTY,EMPTY],
@@ -491,70 +494,69 @@
         //   [PIT,EMPTY,PIT,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY],
         //   [EMPTY,EMPTY,EMPTY,EMPTY,PIT,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY]
         // ]
-          // Place pits randomly
-          
-        if(!file){
+        // Place pits randomly
+
+        if (!file) {
           console.log("File input fail");
-        
-        for (let i = 0; i < PITNumber; i++) {
-          let x, y;
-          do {
-              x = getRandomInt(0, SIZE - 1);
-              y = getRandomInt(0, SIZE - 1);
-          } while (boardView[x][y] !== EMPTY);
-          boardView[x][y] = PIT;
-        }
 
-        for (let i = 0; i < WUMPUSNumber; i++) {
-          let x, y;
-          do {                                           //place wuppus
+          for (let i = 0; i < PITNumber; i++) {
+            let x, y;
+            do {
               x = getRandomInt(0, SIZE - 1);
               y = getRandomInt(0, SIZE - 1);
-          } while (boardView[x][y] !== EMPTY);
-          boardView[x][y] = WUMPUS;
-        }
-          
-        for (let i = 0; i < GOLDNumber; i++) {
-          let x,y;
-          do {                                    //place gold
-              x = getRandomInt(0, SIZE - 1);
-              y = getRandomInt(0, SIZE - 1);
-          } while (boardView[x][y] !== EMPTY);
-          boardView[x][y] = GOLD;
-        }
-      }
-      else{
-        console.log("Data set by file");
-        GOLDNumber=0;
-        WUMPUSNumber =0;
-        for(let i=0;i<SIZE;i++){
-          for(let j=0;j<SIZE;j++){
-            boardView[i][j] =  array[i][j];
-            if(array[i][j] === GOLD)
-              GOLDNumber++;
-            if(array[i][j] === WUMPUS) WUMPUSNumber++;
+            } while (boardView[x][y] !== EMPTY);
+            boardView[x][y] = PIT;
           }
+
+          for (let i = 0; i < WUMPUSNumber; i++) {
+            let x, y;
+            do {
+              //place wuppus
+              x = getRandomInt(0, SIZE - 1);
+              y = getRandomInt(0, SIZE - 1);
+            } while (boardView[x][y] !== EMPTY);
+            boardView[x][y] = WUMPUS;
+          }
+
+          for (let i = 0; i < GOLDNumber; i++) {
+            let x, y;
+            do {
+              //place gold
+              x = getRandomInt(0, SIZE - 1);
+              y = getRandomInt(0, SIZE - 1);
+            } while (boardView[x][y] !== EMPTY);
+            boardView[x][y] = GOLD;
+          }
+        } else {
+          console.log("Data set by file");
+          GOLDNumber = 0;
+          WUMPUSNumber = 0;
+          for (let i = 0; i < SIZE; i++) {
+            for (let j = 0; j < SIZE; j++) {
+              boardView[i][j] = array[i][j];
+              if (array[i][j] === GOLD) GOLDNumber++;
+              if (array[i][j] === WUMPUS) WUMPUSNumber++;
+            }
+          }
+          arrowRemain = WUMPUSNumber;
+          console.log(boardView);
         }
-        arrowRemain = WUMPUSNumber
-        console.log(boardView);
 
-      }
-          
-       console.log(boardView," is board view")
-
+        console.log(boardView, " is board view");
       }
       function validCheck(i, j) {
         return i >= 0 && i < SIZE && j >= 0 && j < SIZE;
       }
       function checkAdjacentCell(i, j) {
-        if(boardView[i][j] === PIT) return PIT;
-        else if(boardView[i][j] === WUMPUS) return WUMPUS;
-        else if(boardView[i][j] === GOLD){
+        if (boardView[i][j] === PIT) return PIT;
+        else if (boardView[i][j] === WUMPUS) return WUMPUS;
+        else if (boardView[i][j] === GOLD) {
           //boardView[i][j] = EMPTY;
           return GOLD;
         }
 
-        let hasPit=false, hasWumpus=false;
+        let hasPit = false,
+          hasWumpus = false;
         const directions = [
           [1, 0],
           [0, 1],
@@ -564,16 +566,16 @@
         for (const [px, py] of directions) {
           const x = i + px;
           const y = j + py;
-          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit=true;
-          else if (validCheck(x, y) && boardView[x][y] === WUMPUS) hasWumpus=true;
-
+          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit = true;
+          else if (validCheck(x, y) && boardView[x][y] === WUMPUS)
+            hasWumpus = true;
         }
-      
-        if(hasPit && hasWumpus) return BREEZEstench;
-        else if(hasPit) return BREEZE;
-        else if(hasWumpus) return STENCH;
-        else return EMPTY;   
-    }
+
+        if (hasPit && hasWumpus) return BREEZEstench;
+        else if (hasPit) return BREEZE;
+        else if (hasWumpus) return STENCH;
+        else return EMPTY;
+      }
 
       function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -581,28 +583,36 @@
 
       function setAttribute(x, y) {
         TotalPoint--;
-        document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
+        document.getElementById(
+          "TotalPoint"
+        ).innerHTML = `Total point: ${TotalPoint}`;
         let textt = "";
         let theDiv = document.getElementById(posToDivID(x, y));
         theDiv.classList.add("visited");
         theDiv.classList.add("Nvisited");
-        if (checkAdjacentCell(x,y) == STENCH) theDiv.classList.add("snitchCell");
-        else if (checkAdjacentCell(x,y) == BREEZE) theDiv.classList.add("breezeCell");
-        else if (checkAdjacentCell(x,y) == BREEZEstench) theDiv.classList.add("doubleCell");
-        else if (checkAdjacentCell(x,y) == WUMPUS) theDiv.classList.add("wumpusCell");
-        else if (checkAdjacentCell(x,y) == PIT) theDiv.classList.add("pitCell");
-        else if (checkAdjacentCell(x,y) == GOLD) theDiv.classList.add("goldCell");
+        if (checkAdjacentCell(x, y) == STENCH)
+          theDiv.classList.add("snitchCell");
+        else if (checkAdjacentCell(x, y) == BREEZE)
+          theDiv.classList.add("breezeCell");
+        else if (checkAdjacentCell(x, y) == BREEZEstench)
+          theDiv.classList.add("doubleCell");
+        else if (checkAdjacentCell(x, y) == WUMPUS)
+          theDiv.classList.add("wumpusCell");
+        else if (checkAdjacentCell(x, y) == PIT)
+          theDiv.classList.add("pitCell");
+        else if (checkAdjacentCell(x, y) == GOLD)
+          theDiv.classList.add("goldCell");
 
-        if (checkAdjacentCell(x,y) == PIT || checkAdjacentCell(x,y) == WUMPUS) {
+        if (
+          checkAdjacentCell(x, y) == PIT ||
+          checkAdjacentCell(x, y) == WUMPUS
+        ) {
           alert("Game Over. Agent killed");
           agent.gameOver = true;
           //location.reload();
           console.log("Game over for wumpus and pit : ", x, " ", y);
         }
-
-        
       }
-      
 
       const getIndexFromNumber = (num) => ({
         x: Math.floor(num / 10),
@@ -611,8 +621,6 @@
 
       // await setBoard();
       // setAttribute(0, 0);         //set starting point
-      
-     
 
       async function aiMovement(lowestPath) {
         let lastPath = lowestPath.length - 1;
@@ -643,15 +651,19 @@
         const { x: rowIndex, y: colIndex } = getIndexFromNumber(
           lowestPath[lastPath]
         );
-        return checkAdjacentCell(rowIndex,colIndex);
+        return checkAdjacentCell(rowIndex, colIndex);
       }
 
       function killWumpus(pointX, pointY) {
         if (boardView[pointX][pointY] === WUMPUS) {
-          TotalPoint +=1000;
+          TotalPoint += 1000;
           TotalWumpusKill++;
-          document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
-          document.getElementById("TotalWumpusKill").innerHTML = `Total wumpus kill: ${TotalWumpusKill}`;
+          document.getElementById(
+            "TotalPoint"
+          ).innerHTML = `Total point: ${TotalPoint}`;
+          document.getElementById(
+            "TotalWumpusKill"
+          ).innerHTML = `Total wumpus kill: ${TotalWumpusKill}`;
           boardView[pointX][pointY] = EMPTY; //later try to adjus sorounding
           //boardView[pointX][pointY] = checkAdjacentCell(pointX,pointY);
           let theDiv = document.getElementById(posToDivID(pointX, pointY));
@@ -663,23 +675,29 @@
           return false;
         }
         arrowRemain--;
-        document.getElementById("arrowRemain").innerHTML = `Arrow remain: ${arrowRemain}`;
+        document.getElementById(
+          "arrowRemain"
+        ).innerHTML = `Arrow remain: ${arrowRemain}`;
       }
 
-      function sensorForGold(i,j){
-        
-        TotalPoint+=1000;
-        document.getElementById("TotalPoint").innerHTML = `Total point: ${TotalPoint}`;
-          found_gold++;
-          document.getElementById("TotalGoldFound").innerHTML = `Total gold found: ${found_gold}`;
-          
+      function sensorForGold(i, j) {
+        TotalPoint += 1000;
+        document.getElementById(
+          "TotalPoint"
+        ).innerHTML = `Total point: ${TotalPoint}`;
+        found_gold++;
+        document.getElementById(
+          "TotalGoldFound"
+        ).innerHTML = `Total gold found: ${found_gold}`;
+
         if (found_gold == GOLDNumber) {
           alert("Congratulation Game Finished. All GOLD collected");
           agent.gameOver = true;
           //location.reload();
           console.log("Game over for gold ");
         }
-        let hasPit=false, hasWumpus=false;
+        let hasPit = false,
+          hasWumpus = false;
         const directions = [
           [1, 0],
           [0, 1],
@@ -689,22 +707,22 @@
         for (const [px, py] of directions) {
           const x = i + px;
           const y = j + py;
-          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit=true;
-          else if (validCheck(x, y) && boardView[x][y] === WUMPUS) hasWumpus=true;
+          if (validCheck(x, y) && boardView[x][y] === PIT) hasPit = true;
+          else if (validCheck(x, y) && boardView[x][y] === WUMPUS)
+            hasWumpus = true;
         }
         let theDiv = document.getElementById(posToDivID(i, j));
-      
-        if(hasPit && hasWumpus){
+
+        if (hasPit && hasWumpus) {
           theDiv.classList.add("goldBoth");
-           return BREEZEstench;
-        }
-        else if(hasPit){ 
+          return BREEZEstench;
+        } else if (hasPit) {
           theDiv.classList.add("goldBreez");
-          return BREEZE;}
-        else if(hasWumpus){
+          return BREEZE;
+        } else if (hasWumpus) {
           theDiv.classList.add("goldStench");
-          return STENCH;}
-        else return EMPTY;
+          return STENCH;
+        } else return EMPTY;
       }
 
       //agent.initiateTheGame();
@@ -725,7 +743,7 @@
           this.totalPoint = 0;
           this.numberOfWumpusKill = 0;
           this.PITProbability = 1;
-          this.ArrowRemain=WUMPUSNumber;
+          this.ArrowRemain = WUMPUSNumber;
         }
 
         directions = [
@@ -735,7 +753,6 @@
           [0, -1],
         ];
 
-      
         async initiateTheGame() {
           //this.game = new WumpusWorld();
           //this.game.createBoard();
@@ -743,8 +760,15 @@
             "Here game started-----------------------------------------------"
           );
 
-          this.board[this.agentX][this.agentY] = checkAdjacentCell(this.agentX,this.agentY);
-          agentMind(this.agentX, this.agentY, this.board[this.agentX][this.agentY]);
+          this.board[this.agentX][this.agentY] = checkAdjacentCell(
+            this.agentX,
+            this.agentY
+          );
+          agentMind(
+            this.agentX,
+            this.agentY,
+            this.board[this.agentX][this.agentY]
+          );
           let count = 0;
           //await this.findBestMove();
           while (this.gameOver === false) {
@@ -795,17 +819,18 @@
 
             let status = await aiMovement(lowestPath);
             console.log("this is from forntent: ", status);
-            
+
             //this.game.passingMove(lowestPoint[0], lowestPoint[1]); //send the point or the path to forntent
             this.checkStatus(status); //check  if the gane end
-            if (status === GOLD) status = sensorForGold(lowestPoint[0],lowestPoint[1]);
-            agentMind(lowestPoint[0],lowestPoint[1],status);
+            if (status === GOLD)
+              status = sensorForGold(lowestPoint[0], lowestPoint[1]);
+            //agentMind(lowestPoint[0],lowestPoint[1],status);
             this.board[lowestPoint[0]][lowestPoint[1]] = status;
             this.agentX = lowestPoint[0];
             this.agentY = lowestPoint[1];
             this.totalPoint -= lowestPath.length - 1;
             //count++;
-          } while (this.gameOver === false && checkArray.length !== 0  );
+          } while (this.gameOver === false && checkArray.length !== 0);
 
           for (let row of this.board) {
             console.log(row.join("    "));
@@ -878,10 +903,10 @@
           let status = await aiMovement(path);
           console.log("this is from forntent: ", status); //send the point or the path to forntent
           //if (status === GOLD) status = this.game.passingMove(i, j);
-          if (status === GOLD) status = sensorForGold(i,j);
+          if (status === GOLD) status = sensorForGold(i, j);
           this.checkStatus(status); //check  if the gane end
           console.log(status, " is the status of ", i, " - ", j);
-          agentMind(i,j,status);
+          //agentMind(i,j,status);
           this.board[i][j] = status;
           this.agentX = i;
           this.agentY = j;
@@ -961,35 +986,49 @@
           console.log(`Coordinates: (${highestX}, ${highestY})`);
 
           //kill here
-          if (highestValue >= 2 && this.ArrowRemain>0) {
+          if (highestValue >= 2 && this.ArrowRemain > 0) {
             //@update check here that arrow are here
             this.ArrowRemain--;
             console.log("make a movement for kill wumpus");
-            let i, j,lowcost=Number.MAX_VALUE,lowcostPath;
+            let i,
+              j,
+              lowcost = Number.MAX_VALUE,
+              lowcostPath;
             const graph = new Graph();
             graph.createGraph(this.board);
-            console.log(this.agentX,"===",this.agentY);
+            console.log(this.agentX, "===", this.agentY);
             for (const [px, py] of this.directions) {
               const x = highestX + px;
               const y = highestY + py;
-              if (
-                this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                const path = graph.BFS(this.agentX * SIZE + this.agentY,x * SIZE + y);
-                console.log(x," -- ",y,"  ",path,path.length)
-                if(path && path.length<lowcost){
+              if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
+                const path = graph.BFS(
+                  this.agentX * SIZE + this.agentY,
+                  x * SIZE + y
+                );
+                console.log(x, " -- ", y, "  ", path, path.length);
+                if (path && path.length < lowcost) {
                   lowcostPath = path;
                   lowcost = path.length;
                   i = x;
                   j = y;
                 }
-                    
               }
             }
-            console.log("after for loop")
-            
+            console.log("after for loop");
+
             this.agentX = i;
             this.agentY = j;
-            console.log(i, " ", j," ",this.agentX," ",this.agentY, " in kill part ", lowcostPath);
+            console.log(
+              i,
+              " ",
+              j,
+              " ",
+              this.agentX,
+              " ",
+              this.agentY,
+              " in kill part ",
+              lowcostPath
+            );
             //SLEEPINGTIME = 500;
             let status = await aiMovement(lowcostPath);
             //send the point or the path to forntent
@@ -1015,7 +1054,7 @@
                 " ",
                 highestY
               );
-              
+
               let status = await aiMovement([
                 this.agentX * SIZE + this.agentY,
                 highestX * SIZE + highestY,
@@ -1023,21 +1062,20 @@
               console.log("this is from forntent: ", status);
               console.log(status, " is the status of ", i, " - ", j);
               this.board[i][j] = status;
-              agentMind(highestX,highestY,status);
+              // agentMind(highestX,highestY,status);
               this.agentX = highestX;
               this.agentY = highestY;
               console.log("Here wumpus are killed###########################");
               this.numberOfWumpusKill++;
 
-              
               for (const [px, py] of this.directions) {
                 //update currrent board
                 const x = highestX + px;
                 const y = highestY + py;
-               
+
                 if (this.validCheck(x, y) && this.board[x][y] !== UNCOVER) {
-                  this.board[x][y] = checkAdjacentCell(x,y);
-                  agentMind(x,y,this.board[x][y]);
+                  this.board[x][y] = checkAdjacentCell(x, y);
+                  // agentMind(x,y,this.board[x][y]);
                 }
               }
               //this.totalPoint -= 1;
@@ -1202,90 +1240,49 @@
       }
 
       const agent = new Agent();
-      async function startGame(){
+      async function startGame() {
         await setBoard();
-        setAttribute(9,0);
+        setAttribute(9, 0);
         agent.initiateTheGame();
       }
 
-      async function restartGame(){
+      async function restartGame() {
         location.reload();
         await setBoard();
-        setAttribute(9,0);
+        setAttribute(9, 0);
         agent.initiateTheGame();
       }
 
-
       const directions = [
-          [1, 0],
-          [0, 1],
-          [-1, 0],
-          [0, -1],
-        ];
+        [1, 0],
+        [0, 1],
+        [-1, 0],
+        [0, -1],
+      ];
 
-      const agentBoard = Array(SIZE).fill(null).map(() => Array(SIZE).fill(EMPTY));
-      function agentMind(i,j,sensor){
-        // let theDiv = document.getElementById(`0${posToDivID(x, y)}`);
-        // theDiv.classList.add("visited");
-        if(sensor == EMPTY){
-          agentBoard[i][j] = SAFE;
-          for (const [px, py] of directions) {
-          const x = i + px;
-          const y = j + py;
-          if (validCheck(x, y)){
-            changeSorounding("safe",x,y);
-            agentBoard[x][y] = SAFE;
-          }
-        }
-        }else if(sensor===BREEZE){
-          for (const [px, py] of directions) {
-          const x = i + px;
-          const y = j + py;
-            if (validCheck(x, y) && agentBoard[x][y] === EMPTY ){
-              changeSorounding("canPit",x,y);
-              agentBoard[x][y] = CANpit;
-            }else if(validCheck(x, y) && agentBoard[x][y] === CANwumpus){
-              changeSorounding("canBoth",x,y);
-              agentBoard[x][y] = CANboth;
+      const agentBoard = boardView;
+      function agentMind(i, j, sensor) {
+        for (let i = 0; i < SIZE; i++) {
+          for (let j = 0; j < SIZE; j++) {
+            if (agentBoard[i][j] == EMPTY) {
+              changeSorounding("visited", i, j);
+            } else if (agentBoard[i][j] == WUMPUS) {
+              changeSorounding("wumpusCell", i, j);
+            } else if (agentBoard[i][j] == GOLD) {
+              changeSorounding("goldCell", i, j);
+            } else if (agentBoard[i][j] == PIT) {
+              changeSorounding("pitCell", i, j);
             }
           }
         }
-        else if(sensor===STENCH){
-          for (const [px, py] of directions) {
-          const x = i + px;
-          const y = j + py;
-            if (validCheck(x, y) && agentBoard[x][y] === EMPTY){
-              changeSorounding("canWumpus",x,y);
-              agentBoard[x][y] = CANwumpus;
-            }else if(validCheck(x, y) && agentBoard[x][y] === CANpit){
-              changeSorounding("canBoth",x,y);
-              agentBoard[x][y] = CANboth;
-            }
-          }
-        }
-        // else if(sensor==="kill"){
-        //   for (const [px, py] of directions) {
-        //   const x = i + px;
-        //   const y = j + py;
-        //     if (validCheck(x, y) && agentBoard[x][y] === STENCH){
-        //       changeSorounding("sa",x,y);
-        //       agentBoard[x][y] = CANwumpus;
-        //     }else if(validCheck(x, y) && agentBoard[x][y] === CANpit){
-        //       changeSorounding("b?",x,y);
-        //       agentBoard[x][y] = CANboth;
-        //     }
-        //   }
-        // }
-        
       }
 
-      function changeSorounding(text,x,y){
+      function changeSorounding(text, x, y) {
         //console.log(`0${posToDivID(x, y)}`,x,y);
         //document.getElementById(`0${posToDivID(x, y)}`).innerHTML = `${text}`;
-         let theDiv = document.getElementById(`0${posToDivID(x, y)}`);
-         theDiv.classList.add(text);
+        let theDiv = document.getElementById(`0${posToDivID(x, y)}`);
+        theDiv.classList.add(text);
       }
-      
     </script>
   </body>
 </html>
